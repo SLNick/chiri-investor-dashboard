@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chiri Investor Outreach Dashboard</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         :root {
-            --primary: #6C63FF;
-            --primary-dark: #5A52D5;
-            --primary-light: #8B85FF;
-            --primary-rgb: 108, 99, 255;
-            --bg: #1A1A1A;
-            --card-bg: #242424;
-            --darker: #121212;
-            --border: #333;
+            --primary: #FF6D35;
+            --primary-dark: #E85D2A;
+            --primary-light: #FF8F5E;
+            --primary-rgb: 255, 109, 53;
+            --bg: #000000;
+            --card-bg: #111111;
+            --darker: #0A0A0A;
+            --border: #222222;
             --text: #E0E0E0;
             --text-secondary: #999;
             --text-muted: #666;
@@ -38,7 +40,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -47,7 +49,7 @@
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            background: linear-gradient(135deg, #FF6D35 0%, #F7931E 100%);
             padding: 16px 24px;
             display: flex;
             align-items: center;
@@ -55,7 +57,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
+            box-shadow: 0 2px 12px rgba(255, 109, 53, 0.3);
         }
 
         .logo {
@@ -125,13 +127,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            background: linear-gradient(135deg, #FF6D35 0%, #F7931E 100%);
             color: var(--white);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #8B85FF 0%, #6C63FF 100%);
-            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.4);
+            background: linear-gradient(135deg, #FF8F5E 0%, #FF6D35 100%);
+            box-shadow: 0 2px 8px rgba(255, 109, 53, 0.4);
         }
 
         .btn-secondary {
@@ -193,7 +195,7 @@
 
         .nav-tab:hover {
             color: var(--text);
-            background: rgba(108, 99, 255, 0.05);
+            background: rgba(255, 109, 53, 0.05);
         }
 
         .nav-tab.active {
@@ -329,7 +331,7 @@
         }
 
         .column-cards.drag-over {
-            background: rgba(108, 99, 255, 0.05);
+            background: rgba(255, 109, 53, 0.05);
             border: 1px dashed var(--primary);
             border-radius: var(--radius);
         }
@@ -347,7 +349,7 @@
 
         .investor-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(255, 109, 53, 0.15);
             transform: translateY(-1px);
         }
 
@@ -431,9 +433,9 @@
         }
 
         .tag.fit-strong {
-            background: rgba(108, 99, 255, 0.15);
+            background: rgba(255, 109, 53, 0.15);
             color: var(--primary-light);
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(255, 109, 53, 0.3);
         }
 
         .tag.fit-moderate {
@@ -449,9 +451,9 @@
         }
 
         .tag.owner {
-            background: rgba(108, 99, 255, 0.1);
+            background: rgba(255, 109, 53, 0.1);
             color: var(--primary);
-            border: 1px solid rgba(108, 99, 255, 0.2);
+            border: 1px solid rgba(255, 109, 53, 0.2);
         }
 
         .follow-up {
@@ -724,7 +726,7 @@
 
         .modal-header {
             padding: 16px 20px;
-            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            background: linear-gradient(135deg, #FF6D35 0%, #F7931E 100%);
             border-radius: var(--radius-lg) var(--radius-lg) 0 0;
             display: flex;
             align-items: center;
@@ -1081,7 +1083,7 @@
         .login-logo-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            background: linear-gradient(135deg, #FF6D35 0%, #F7931E 100%);
             border-radius: 14px;
             display: inline-flex;
             align-items: center;
@@ -1129,7 +1131,7 @@
         .login-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            background: linear-gradient(135deg, #FF6D35 0%, #F7931E 100%);
             color: var(--white);
             border: none;
             border-radius: var(--radius);
@@ -1140,7 +1142,7 @@
         }
 
         .login-btn:hover {
-            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 109, 53, 0.4);
         }
 
         .login-btn:disabled {
@@ -1164,8 +1166,8 @@
 
         /* Enrichment UI */
         .enrich-btn {
-            background: rgba(108, 99, 255, 0.12);
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            background: rgba(255, 109, 53, 0.12);
+            border: 1px solid rgba(255, 109, 53, 0.3);
             color: var(--primary);
             padding: 3px 8px;
             border-radius: var(--radius-sm);
@@ -1178,7 +1180,7 @@
         }
 
         .enrich-btn:hover {
-            background: rgba(108, 99, 255, 0.25);
+            background: rgba(255, 109, 53, 0.25);
             border-color: var(--primary);
         }
 
@@ -1201,7 +1203,7 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            border: 2px solid rgba(108, 99, 255, 0.3);
+            border: 2px solid rgba(255, 109, 53, 0.3);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: enrich-spin 0.8s linear infinite;
@@ -1224,9 +1226,9 @@
         }
 
         .enrichment-badge.running {
-            background: rgba(108, 99, 255, 0.15);
+            background: rgba(255, 109, 53, 0.15);
             color: var(--primary-light);
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(255, 109, 53, 0.3);
         }
 
         .enrichment-badge.completed {
@@ -1399,10 +1401,10 @@
         .portfolio-tag {
             font-size: 9px;
             padding: 1px 5px;
-            background: rgba(108, 99, 255, 0.1);
+            background: rgba(255, 109, 53, 0.1);
             color: var(--primary-light);
             border-radius: 6px;
-            border: 1px solid rgba(108, 99, 255, 0.2);
+            border: 1px solid rgba(255, 109, 53, 0.2);
         }
 
         /* Fit Score Badge */
@@ -1417,9 +1419,9 @@
         }
 
         .fit-score-badge.exceptional {
-            background: rgba(108, 99, 255, 0.15);
+            background: rgba(255, 109, 53, 0.15);
             color: var(--primary-light);
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(255, 109, 53, 0.3);
         }
 
         .fit-score-badge.strong {
@@ -1637,8 +1639,8 @@
             align-items: center;
             gap: 4px;
             padding: 3px 8px;
-            background: rgba(108, 99, 255, 0.15);
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            background: rgba(255, 109, 53, 0.15);
+            border: 1px solid rgba(255, 109, 53, 0.3);
             border-radius: 12px;
             font-size: 12px;
             color: var(--primary-light);
@@ -1745,8 +1747,8 @@
             align-items: center;
             gap: 4px;
             padding: 3px 8px;
-            background: rgba(108, 99, 255, 0.12);
-            border: 1px solid rgba(108, 99, 255, 0.25);
+            background: rgba(255, 109, 53, 0.12);
+            border: 1px solid rgba(255, 109, 53, 0.25);
             border-radius: 10px;
             font-size: 11px;
             color: var(--primary-light);
@@ -1797,7 +1799,7 @@
         }
 
         .runs-table tr:hover {
-            background: rgba(108, 99, 255, 0.03);
+            background: rgba(255, 109, 53, 0.03);
         }
 
         .run-status {
@@ -1826,7 +1828,7 @@
         }
 
         .run-status.running {
-            background: rgba(108, 99, 255, 0.15);
+            background: rgba(255, 109, 53, 0.15);
             color: var(--primary-light);
         }
 
@@ -1898,7 +1900,7 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-logo">
-                <div class="login-logo-icon">CH</div>
+                <div class="login-logo-icon"><svg width="48" height="56" viewBox="0 0 240 234" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.30 196.45 c-1.65 -2.35 -1.90 -2 13.95 -21.45 22.25 -27.40 46.25 -57.70 46.25 -58.50 0 -0.55 6.55 -8.65 7.50 -9.25 1.90 -1.15 27.85 -35.30 28.35 -37.25 0.30 -1.15 7.35 -11.40 14.05 -20.40 4.15 -5.55 8.55 -7.45 12.55 -5.35 4.60 2.35 12.60 14.50 29.80 45.25 4.95 8.95 9.85 17.40 10.80 18.80 1 1.40 2.75 4.55 3.95 7 5.25 10.80 26.40 47.10 34.10 58.55 l2.40 3.60 0 4.95 c0 2.70 -0.10 5.05 -0.25 5.20 -0.40 0.35 -14.45 -3.30 -18.45 -4.80 -9.40 -3.55 -20.70 -10.65 -29 -18.25 -2.45 -2.20 -4.60 -4.05 -4.80 -4.05 -0.20 0 -0.85 0.55 -1.50 1.25 -1.65 1.75 -3.55 1.60 -6.80 -0.55 -5.10 -3.40 -11.20 -11.30 -18.45 -23.90 -1.90 -3.25 -3.75 -6.05 -4.15 -6.15 -1.15 -0.50 -2 0.95 -3.10 5.35 -3 11.85 -7.35 21.95 -12 28.15 -3.30 4.30 -10.90 11.15 -13.95 12.50 -5.40 2.40 -10.80 3 -13.80 1.55 -2.25 -1.05 -5.80 -4.90 -7.75 -8.40 -0.90 -1.55 -1.85 -2.80 -2.15 -2.80 -0.30 0 -7 3.25 -14.85 7.20 -23.20 11.70 -46.05 22.10 -49.70 22.60 -1.90 0.30 -2.25 0.15 -3 -0.85z" fill="#FF6D35"/></svg></div>
                 <div class="login-title">Chiri Investor Dashboard</div>
                 <div class="login-subtitle">Sign in to manage investor outreach</div>
             </div>
@@ -1917,7 +1919,7 @@
         <!-- Header -->
         <div class="header">
             <div class="logo">
-                <div class="logo-icon">CH</div>
+                <div class="logo-icon"><svg width="32" height="40" viewBox="0 0 240 234" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.30 196.45 c-1.65 -2.35 -1.90 -2 13.95 -21.45 22.25 -27.40 46.25 -57.70 46.25 -58.50 0 -0.55 6.55 -8.65 7.50 -9.25 1.90 -1.15 27.85 -35.30 28.35 -37.25 0.30 -1.15 7.35 -11.40 14.05 -20.40 4.15 -5.55 8.55 -7.45 12.55 -5.35 4.60 2.35 12.60 14.50 29.80 45.25 4.95 8.95 9.85 17.40 10.80 18.80 1 1.40 2.75 4.55 3.95 7 5.25 10.80 26.40 47.10 34.10 58.55 l2.40 3.60 0 4.95 c0 2.70 -0.10 5.05 -0.25 5.20 -0.40 0.35 -14.45 -3.30 -18.45 -4.80 -9.40 -3.55 -20.70 -10.65 -29 -18.25 -2.45 -2.20 -4.60 -4.05 -4.80 -4.05 -0.20 0 -0.85 0.55 -1.50 1.25 -1.65 1.75 -3.55 1.60 -6.80 -0.55 -5.10 -3.40 -11.20 -11.30 -18.45 -23.90 -1.90 -3.25 -3.75 -6.05 -4.15 -6.15 -1.15 -0.50 -2 0.95 -3.10 5.35 -3 11.85 -7.35 21.95 -12 28.15 -3.30 4.30 -10.90 11.15 -13.95 12.50 -5.40 2.40 -10.80 3 -13.80 1.55 -2.25 -1.05 -5.80 -4.90 -7.75 -8.40 -0.90 -1.55 -1.85 -2.80 -2.15 -2.80 -0.30 0 -7 3.25 -14.85 7.20 -23.20 11.70 -46.05 22.10 -49.70 22.60 -1.90 0.30 -2.25 0.15 -3 -0.85z" fill="#FF6D35"/></svg></div>
                 <div>
                     <h1>Chiri <span>Investor Outreach Dashboard</span></h1>
                     <div class="slogan">The Enterprise Autopilot</div>
@@ -2022,7 +2024,7 @@
                     <div class="option-list" id="stagesList"></div>
                     <div class="add-option-form">
                         <input type="text" placeholder="Stage name" id="newStageName">
-                        <input type="color" id="newStageColor" value="#6C63FF" style="width: 40px; padding: 2px;">
+                        <input type="color" id="newStageColor" value="#FF6D35" style="width: 40px; padding: 2px;">
                         <button class="btn btn-primary btn-sm" onclick="addStage()">Add</button>
                     </div>
                 </div>
@@ -2498,7 +2500,7 @@
                 { id: 'contacted', name: 'Contacted', color: '#2196F3' },
                 { id: 'responded', name: 'Responded', color: '#FF9800' },
                 { id: 'meeting-scheduled', name: 'Meeting Scheduled', color: '#9C27B0' },
-                { id: 'due-diligence', name: 'Due Diligence', color: '#6C63FF' },
+                { id: 'due-diligence', name: 'Due Diligence', color: '#FF6D35' },
                 { id: 'term-sheet', name: 'Term Sheet', color: '#4CAF50' },
                 { id: 'closed', name: 'Closed', color: '#F44336' },
                 { id: 'passed', name: 'Passed', color: '#424242' }
@@ -2958,7 +2960,7 @@
 
             // Fit
             const fitEl = document.getElementById('fitChart');
-            const fitColors = { Strong: '#6C63FF', Moderate: '#2196F3', Weak: '#9E9E9E' };
+            const fitColors = { Strong: '#FF6D35', Moderate: '#2196F3', Weak: '#9E9E9E' };
             const maxFit = Math.max(1, ...config.fitCategories.map(f => investors.filter(i => i.fit === f).length));
             fitEl.innerHTML = config.fitCategories.map(f => {
                 const count = investors.filter(i => i.fit === f).length;
@@ -2982,9 +2984,9 @@
                 const pct = (count / maxOwner) * 100;
                 return `
                     <div class="priority-row">
-                        <span class="priority-dot" style="background: #6C63FF"></span>
+                        <span class="priority-dot" style="background: #FF6D35"></span>
                         <span class="priority-label">${o}</span>
-                        <div class="priority-bar-bg"><div class="priority-bar" style="width: ${pct}%; background: #6C63FF;"></div></div>
+                        <div class="priority-bar-bg"><div class="priority-bar" style="width: ${pct}%; background: #FF6D35;"></div></div>
                         <span class="priority-count">${count}</span>
                     </div>
                 `;
