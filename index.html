@@ -1,0 +1,3877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiri Investor Outreach Dashboard</title>
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5A52D5;
+            --primary-light: #8B85FF;
+            --primary-rgb: 108, 99, 255;
+            --bg: #1A1A1A;
+            --card-bg: #242424;
+            --darker: #121212;
+            --border: #333;
+            --text: #E0E0E0;
+            --text-secondary: #999;
+            --text-muted: #666;
+            --white: #FFFFFF;
+            --black: #000000;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+            --radius: 8px;
+            --radius-sm: 4px;
+            --radius-lg: 12px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.3px;
+        }
+
+        .logo span {
+            font-size: 13px;
+            color: var(--white);
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .logo .slogan {
+            display: block;
+            font-size: 11px;
+            color: var(--white);
+            opacity: 0.7;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #8B85FF 0%, #6C63FF 100%);
+            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: var(--card-bg);
+            color: var(--text);
+            border-color: var(--text-secondary);
+        }
+
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #D32F2F;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: var(--darker);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition);
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .nav-tab:hover {
+            color: var(--text);
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card .value.danger {
+            color: var(--danger);
+        }
+
+        .stat-card .value.warning {
+            color: var(--warning);
+        }
+
+        .stat-card .value.success {
+            color: var(--success);
+        }
+
+        /* Kanban Board */
+        .kanban-container {
+            overflow-x: auto;
+            padding-bottom: 16px;
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 16px;
+            min-width: fit-content;
+        }
+
+        .kanban-column {
+            min-width: 280px;
+            max-width: 320px;
+            flex: 1;
+            background: var(--darker);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 280px);
+        }
+
+        .column-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .column-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .column-title .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .column-count {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .column-cards {
+            padding: 12px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 60px;
+        }
+
+        .column-cards.drag-over {
+            background: rgba(108, 99, 255, 0.05);
+            border: 1px dashed var(--primary);
+            border-radius: var(--radius);
+        }
+
+        /* Investor Card */
+        .investor-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            cursor: grab;
+            transition: all var(--transition);
+            position: relative;
+        }
+
+        .investor-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .investor-card.dragging {
+            opacity: 0.4;
+            transform: rotate(2deg);
+        }
+
+        .firm-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .firm-name .card-actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .investor-card:hover .card-actions {
+            opacity: 1;
+        }
+
+        .card-actions button {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .card-actions button:hover {
+            color: var(--white);
+            background: var(--border);
+        }
+
+        .contact {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .tag.priority-high {
+            background: rgba(244, 67, 54, 0.15);
+            color: #FF5252;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .tag.priority-medium {
+            background: rgba(255, 152, 0, 0.15);
+            color: #FFB74D;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        .tag.priority-low {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .tag.fit-strong {
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .tag.fit-moderate {
+            background: rgba(33, 150, 243, 0.15);
+            color: #64B5F6;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .tag.fit-weak {
+            background: rgba(158, 158, 158, 0.15);
+            color: #BDBDBD;
+            border: 1px solid rgba(158, 158, 158, 0.3);
+        }
+
+        .tag.owner {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .follow-up {
+            font-size: 11px;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .follow-up.overdue {
+            color: var(--danger);
+        }
+
+        .follow-up.today {
+            color: var(--warning);
+        }
+
+        .follow-up.upcoming {
+            color: var(--text-secondary);
+        }
+
+        .follow-up.none {
+            color: var(--text-muted);
+        }
+
+        /* Analytics */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .chart-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .funnel-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .funnel-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .funnel-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            min-width: 120px;
+            text-align: right;
+        }
+
+        .funnel-bar-bg {
+            flex: 1;
+            height: 28px;
+            background: var(--darker);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .funnel-bar {
+            height: 100%;
+            border-radius: var(--radius-sm);
+            transition: width 0.6s ease;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+        }
+
+        .funnel-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--white);
+            min-width: 30px;
+            text-align: right;
+        }
+
+        .priority-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .priority-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .priority-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .priority-label {
+            font-size: 13px;
+            color: var(--text);
+            min-width: 80px;
+        }
+
+        .priority-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: var(--darker);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .priority-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .priority-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            min-width: 20px;
+            text-align: right;
+        }
+
+        /* Reminders */
+        .reminders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reminder-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all var(--transition);
+        }
+
+        .reminder-item:hover {
+            border-color: var(--primary);
+        }
+
+        .reminder-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .reminder-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .reminder-icon.overdue {
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--danger);
+        }
+
+        .reminder-icon.today {
+            background: rgba(255, 152, 0, 0.15);
+            color: var(--warning);
+        }
+
+        .reminder-icon.upcoming {
+            background: rgba(33, 150, 243, 0.15);
+            color: var(--info);
+        }
+
+        .reminder-details h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 2px;
+        }
+
+        .reminder-details p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .reminder-date {
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .reminder-date.overdue {
+            color: var(--danger);
+        }
+
+        .reminder-date.today {
+            color: var(--warning);
+        }
+
+        .reminder-date.upcoming {
+            color: var(--text-secondary);
+        }
+
+        .reminder-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 560px;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.2s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .editable-select-wrapper {
+            position: relative;
+        }
+
+        .editable-select-wrapper input {
+            width: 100%;
+        }
+
+        .editable-select-wrapper select {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Settings */
+        .settings-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .settings-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .settings-section p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .option-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .option-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .option-chip .remove-option {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .option-chip .remove-option:hover {
+            color: var(--danger);
+        }
+
+        .add-option-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .add-option-form input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .add-option-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 12px;
+            padding-left: 36px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 13px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 10px center;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
+        .empty-state h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .main-content {
+                padding: 12px 16px;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-tabs {
+                padding: 0 12px;
+            }
+
+            .toolbar {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card .value {
+                font-size: 22px;
+            }
+
+            .kanban-column {
+                min-width: 260px;
+            }
+        }
+
+        /* Login Overlay */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--darker);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-overlay.hidden {
+            display: none;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .login-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .login-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .login-error {
+            color: var(--danger);
+            font-size: 12px;
+            text-align: center;
+            min-height: 18px;
+        }
+
+        .login-hint {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        /* Enrichment UI */
+        .enrich-btn {
+            background: rgba(108, 99, 255, 0.12);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .enrich-btn:hover {
+            background: rgba(108, 99, 255, 0.25);
+            border-color: var(--primary);
+        }
+
+        .enrich-btn.running {
+            animation: enrich-pulse 1.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes enrich-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes enrich-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .enrich-spinner {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid rgba(108, 99, 255, 0.3);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: enrich-spin 0.8s linear infinite;
+        }
+
+        .enrichment-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .enrichment-badge.enriched {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .enrichment-badge.running {
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .enrichment-badge.completed {
+            background: rgba(255, 152, 0, 0.15);
+            color: #FFB74D;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        .enrichment-badge.failed {
+            background: rgba(244, 67, 54, 0.15);
+            color: #FF5252;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .enrichment-badge.none {
+            background: rgba(158, 158, 158, 0.1);
+            color: var(--text-muted);
+            border: 1px solid rgba(158, 158, 158, 0.2);
+        }
+
+        /* Enrich Modal */
+        .enrich-modal .modal {
+            max-width: 680px;
+        }
+
+        .enrich-loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .enrich-loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: enrich-spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        .enrich-loading p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .diff-summary {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .diff-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .diff-table th {
+            text-align: left;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            background: var(--darker);
+        }
+
+        .diff-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .diff-field {
+            font-weight: 500;
+            color: var(--white);
+            white-space: nowrap;
+        }
+
+        .diff-old {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-size: 12px;
+        }
+
+        .diff-new {
+            color: var(--success);
+            font-size: 12px;
+        }
+
+        .diff-confidence {
+            font-size: 11px;
+        }
+
+        .diff-confidence.high {
+            color: var(--success);
+        }
+
+        .diff-confidence.medium {
+            color: var(--warning);
+        }
+
+        .diff-source {
+            font-size: 11px;
+            color: var(--text-secondary);
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .enrich-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Enriched Fields Section on Card */
+        .enriched-section {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .enriched-fields {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .enriched-fields.visible {
+            display: flex;
+        }
+
+        .enriched-field {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 4px;
+        }
+
+        .enriched-field .field-label {
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        .enriched-field .field-value {
+            color: var(--text);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .portfolio-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            margin-top: 2px;
+        }
+
+        .portfolio-tag {
+            font-size: 9px;
+            padding: 1px 5px;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-light);
+            border-radius: 6px;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        /* Fit Score Badge */
+        .fit-score-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .fit-score-badge.exceptional {
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .fit-score-badge.strong {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .fit-score-badge.moderate {
+            background: rgba(255, 152, 0, 0.15);
+            color: #FFB74D;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        .fit-score-badge.weak {
+            background: rgba(244, 67, 54, 0.15);
+            color: #FF5252;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .fit-score-badge.poor {
+            background: rgba(158, 158, 158, 0.15);
+            color: #BDBDBD;
+            border: 1px solid rgba(158, 158, 158, 0.3);
+        }
+
+        .fit-score-section {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        .fit-score-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .fit-score-number {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .fit-score-number.exceptional {
+            color: var(--primary-light);
+        }
+
+        .fit-score-number.strong {
+            color: #81C784;
+        }
+
+        .fit-score-number.moderate {
+            color: #FFB74D;
+        }
+
+        .fit-score-number.weak {
+            color: #FF5252;
+        }
+
+        .fit-score-number.poor {
+            color: #BDBDBD;
+        }
+
+        .fit-score-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .fit-assessment-text {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .fit-signals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .fit-signal {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .fit-signal-icon {
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        .fit-signal-icon.positive {
+            color: var(--success);
+        }
+
+        .fit-signal-icon.neutral {
+            color: var(--warning);
+        }
+
+        .fit-signal-icon.negative {
+            color: var(--danger);
+        }
+
+        /* Company Profile */
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .profile-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .profile-field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-field input,
+        .profile-field textarea,
+        .profile-field select {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color var(--transition);
+        }
+
+        .profile-field input:focus,
+        .profile-field textarea:focus,
+        .profile-field select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .profile-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .profile-save-status {
+            font-size: 12px;
+            color: var(--success);
+            margin-left: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-save-status.visible {
+            opacity: 1;
+        }
+
+        .profile-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .profile-section-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .chip-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            min-height: 42px;
+            align-items: center;
+            cursor: text;
+        }
+
+        .chip-input-container:focus-within {
+            border-color: var(--primary);
+        }
+
+        .chip-input-container input {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 13px;
+            flex: 1;
+            min-width: 80px;
+            padding: 2px 4px;
+            outline: none;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            background: rgba(108, 99, 255, 0.15);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--primary-light);
+        }
+
+        .chip .remove-chip {
+            background: none;
+            border: none;
+            color: var(--primary-light);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.7;
+        }
+
+        .chip .remove-chip:hover {
+            opacity: 1;
+            color: var(--danger);
+        }
+
+        .team-member-card {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .team-member-card input {
+            width: 100%;
+            padding: 6px 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .team-member-card input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .team-member-card button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .team-member-card button:hover {
+            color: var(--danger);
+        }
+
+        /* Agents Tab */
+        .agent-config {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .agent-config h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .agent-config-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .agent-config-row:last-child {
+            border-bottom: none;
+        }
+
+        .agent-config-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            min-width: 120px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .agent-config-value {
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            background: rgba(108, 99, 255, 0.12);
+            border: 1px solid rgba(108, 99, 255, 0.25);
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--primary-light);
+            margin-right: 4px;
+        }
+
+        .system-prompt {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            display: none;
+            margin-top: 8px;
+        }
+
+        .system-prompt.visible {
+            display: block;
+        }
+
+        .runs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .runs-table th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            background: var(--darker);
+        }
+
+        .runs-table td {
+            padding: 8px 12px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .runs-table tr:hover {
+            background: rgba(108, 99, 255, 0.03);
+        }
+
+        .run-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .run-status.completed {
+            background: rgba(255, 152, 0, 0.15);
+            color: #FFB74D;
+        }
+
+        .run-status.approved {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+        }
+
+        .run-status.rejected {
+            background: rgba(244, 67, 54, 0.15);
+            color: #FF5252;
+        }
+
+        .run-status.running {
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--primary-light);
+        }
+
+        .run-status.failed {
+            background: rgba(244, 67, 54, 0.15);
+            color: #FF5252;
+        }
+
+        .run-detail {
+            display: none;
+            padding: 12px;
+            background: var(--darker);
+            border-radius: var(--radius);
+            margin: 4px 0 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .run-detail.visible {
+            display: block;
+        }
+
+        .run-expand {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        .run-expand:hover {
+            color: var(--text);
+            background: var(--card-bg);
+        }
+
+        .runs-empty {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .run-changes-mini {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .doc-placeholder {
+            background: var(--darker);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .doc-placeholder:hover {
+            border-color: var(--primary);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-icon">CH</div>
+                <div class="login-title">Chiri Investor Dashboard</div>
+                <div class="login-subtitle">Sign in to manage investor outreach</div>
+            </div>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input type="email" class="login-input" id="loginEmail" placeholder="you@chiri.ai" required autocomplete="email">
+                <input type="password" class="login-input" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+                <div class="login-error" id="loginError"></div>
+                <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+            </form>
+            <div class="login-hint">Restricted to @chiri.ai emails</div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">CH</div>
+                <div>
+                    <h1>Chiri <span>Investor Outreach Dashboard</span></h1>
+                    <div class="slogan">The Enterprise Autopilot</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="exportCSV()">Export CSV</button>
+                <button class="btn btn-secondary" onclick="exportData()">Export JSON</button>
+                <button class="btn btn-secondary" onclick="handleLogout()" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs" id="navTabs">
+            <div class="nav-tab active" data-tab="pipeline">Pipeline</div>
+            <div class="nav-tab" data-tab="analytics">Analytics</div>
+            <div class="nav-tab" data-tab="reminders">Reminders</div>
+            <div class="nav-tab" data-tab="settings">Settings</div>
+            <div class="nav-tab" data-tab="company-profile">Company Profile</div>
+            <div class="nav-tab" data-tab="agents">Agents</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Stats Row -->
+            <div class="stats-row" id="statsRow">
+                <div class="stat-card"><div class="label">Total Investors</div><div class="value" id="statTotal">0</div></div>
+                <div class="stat-card"><div class="label">Active Conversations</div><div class="value" id="statActive">0</div></div>
+                <div class="stat-card"><div class="label">Response Rate</div><div class="value success" id="statResponse">0%</div></div>
+                <div class="stat-card"><div class="label">In Due Diligence</div><div class="value" id="statDD">0</div></div>
+                <div class="stat-card"><div class="label">Term Sheets</div><div class="value warning" id="statTerms">0</div></div>
+                <div class="stat-card"><div class="label">Overdue Follow-ups</div><div class="value danger" id="statOverdue">0</div></div>
+            </div>
+
+            <!-- Pipeline Tab -->
+            <div class="tab-content active" id="tab-pipeline">
+                <div class="toolbar">
+                    <input type="text" class="search-box" id="searchBox" placeholder="Search investors..." oninput="filterInvestors()">
+                    <div class="filter-group">
+                        <select class="filter-select" id="filterOwner" onchange="filterInvestors()">
+                            <option value="">All Owners</option>
+                        </select>
+                        <select class="filter-select" id="filterPriority" onchange="filterInvestors()">
+                            <option value="">All Priorities</option>
+                        </select>
+                        <select class="filter-select" id="filterFit" onchange="filterInvestors()">
+                            <option value="">All Fit</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="openAddModal()">+ Add Investor</button>
+                    </div>
+                </div>
+                <div class="kanban-container">
+                    <div class="kanban-board" id="kanbanBoard"></div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="tab-analytics">
+                <div class="analytics-grid" id="analyticsGrid">
+                    <div class="chart-card">
+                        <h3>Pipeline Funnel</h3>
+                        <div class="funnel-chart" id="funnelChart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Priority Breakdown</h3>
+                        <div class="priority-chart" id="priorityChart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Fit Assessment Distribution</h3>
+                        <div class="priority-chart" id="fitChart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Owner Distribution</h3>
+                        <div class="priority-chart" id="ownerChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders Tab -->
+            <div class="tab-content" id="tab-reminders">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="font-size: 16px; font-weight: 600; color: var(--white);">Follow-up Reminders</h2>
+                    <button class="btn btn-ghost btn-sm" onclick="clearAllReminders()">Clear All Dates</button>
+                </div>
+                <div class="reminders-list" id="remindersList"></div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="tab-settings">
+                <div class="settings-section" id="settingsOwners">
+                    <h3>Owners</h3>
+                    <p>Team members who manage investor relationships.</p>
+                    <div class="option-list" id="ownersList"></div>
+                    <div class="add-option-form">
+                        <input type="text" placeholder="New owner initials" id="newOwner" maxlength="5">
+                        <button class="btn btn-primary btn-sm" onclick="addOption('owners')">Add</button>
+                    </div>
+                </div>
+                <div class="settings-section" id="settingsStages">
+                    <h3>Pipeline Stages</h3>
+                    <p>Kanban columns for tracking investor progress. Order matters.</p>
+                    <div class="option-list" id="stagesList"></div>
+                    <div class="add-option-form">
+                        <input type="text" placeholder="Stage name" id="newStageName">
+                        <input type="color" id="newStageColor" value="#6C63FF" style="width: 40px; padding: 2px;">
+                        <button class="btn btn-primary btn-sm" onclick="addStage()">Add</button>
+                    </div>
+                </div>
+                <div class="settings-section" id="settingsPriorities">
+                    <h3>Priority Levels</h3>
+                    <p>Priority labels for investor categorization.</p>
+                    <div class="option-list" id="prioritiesList"></div>
+                    <div class="add-option-form">
+                        <input type="text" placeholder="New priority level" id="newPriority">
+                        <button class="btn btn-primary btn-sm" onclick="addOption('priorities')">Add</button>
+                    </div>
+                </div>
+                <div class="settings-section" id="settingsFitCategories">
+                    <h3>Fit Categories</h3>
+                    <p>Investor fit labels.</p>
+                    <div class="option-list" id="fitCategoriesList"></div>
+                    <div class="add-option-form">
+                        <input type="text" placeholder="New fit category" id="newFitCategory">
+                        <button class="btn btn-primary btn-sm" onclick="addOption('fitCategories')">Add</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Data Management</h3>
+                    <p>Export or reset your investor data.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-ghost" onclick="exportData()">Export JSON</button>
+                        <button class="btn btn-ghost" onclick="exportCSV()">Export CSV</button>
+                        <button class="btn btn-danger" onclick="resetData()">Reset All Data</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Profile Tab -->
+            <div class="tab-content" id="tab-company-profile">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <h2 style="font-size: 16px; font-weight: 600; color: var(--white);">Company Profile <span class="profile-save-status" id="profileSaveStatus">Saved</span></h2>
+                </div>
+                <div class="analytics-grid">
+                    <!-- Company Overview -->
+                    <div class="chart-card">
+                        <h3>Company Overview</h3>
+                        <div class="profile-form" id="profileOverview">
+                            <div class="profile-field">
+                                <label>Company Name</label>
+                                <input type="text" data-profile="name" placeholder="e.g., Chiri" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Description</label>
+                                <textarea data-profile="description" placeholder="Brief company description..." oninput="autoSaveProfile()"></textarea>
+                            </div>
+                            <div class="profile-field">
+                                <label>Industry</label>
+                                <input type="text" data-profile="industry" placeholder="e.g., Enterprise AI" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Sector</label>
+                                <input type="text" data-profile="sector" placeholder="e.g., SaaS, AI Agents" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Location</label>
+                                <input type="text" data-profile="location" placeholder="e.g., San Francisco, CA" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Website</label>
+                                <input type="url" data-profile="website" placeholder="https://chiri.ai" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Founded</label>
+                                <input type="text" data-profile="founded" placeholder="e.g., 2025" oninput="autoSaveProfile()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fundraise Details -->
+                    <div class="chart-card">
+                        <h3>Fundraise Details</h3>
+                        <div class="profile-form" id="profileFundraise">
+                            <div class="profile-field">
+                                <label>Current Round</label>
+                                <input type="text" data-profile="stage" placeholder="e.g., Pre-Seed" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Raise Amount</label>
+                                <input type="text" data-profile="raise_amount" placeholder="e.g., $2M" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Pre-Money Valuation</label>
+                                <input type="text" data-profile="pre_money_valuation" placeholder="e.g., $10M" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Instrument</label>
+                                <input type="text" data-profile="instrument" placeholder="e.g., SAFE, Priced Round" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Use of Funds</label>
+                                <textarea data-profile="use_of_funds" placeholder="How will the funds be used?" oninput="autoSaveProfile()"></textarea>
+                            </div>
+                            <div class="profile-field">
+                                <label>Target Investor Types</label>
+                                <div class="chip-input-container" data-chip-field="target_investor_types">
+                                    <input type="text" placeholder="Type and press Enter" onkeydown="handleChipInput(event, 'target_investor_types')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Metrics -->
+                    <div class="chart-card">
+                        <h3>Business Metrics</h3>
+                        <div class="profile-form" id="profileMetrics">
+                            <div class="profile-field">
+                                <label>ARR</label>
+                                <input type="text" data-profile="arr" placeholder="e.g., $500K" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>MRR Growth</label>
+                                <input type="text" data-profile="mrr_growth" placeholder="e.g., 25% m/m" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Customers</label>
+                                <input type="text" data-profile="customers" placeholder="e.g., 15 enterprise" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Burn Rate</label>
+                                <input type="text" data-profile="burn_rate" placeholder="e.g., $80K/mo" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>Runway</label>
+                                <input type="text" data-profile="runway" placeholder="e.g., 18 months" oninput="autoSaveProfile()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Investment Thesis -->
+                    <div class="chart-card">
+                        <h3>Investment Thesis</h3>
+                        <div class="profile-form" id="profileThesis">
+                            <div class="profile-field">
+                                <label>Moat / Defensibility</label>
+                                <textarea data-profile="moat" placeholder="What makes you defensible?" oninput="autoSaveProfile()"></textarea>
+                            </div>
+                            <div class="profile-field">
+                                <label>Competitive Advantages</label>
+                                <textarea data-profile="competitive_advantages" placeholder="Key differentiators..." oninput="autoSaveProfile()"></textarea>
+                            </div>
+                            <div class="profile-field">
+                                <label>Why Now?</label>
+                                <textarea data-profile="why_now" placeholder="Why is now the right time?" oninput="autoSaveProfile()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Opportunity -->
+                    <div class="chart-card">
+                        <h3>Market Opportunity</h3>
+                        <div class="profile-form" id="profileMarket">
+                            <div class="profile-field">
+                                <label>TAM</label>
+                                <input type="text" data-profile="tam" placeholder="e.g., $50B" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>SAM</label>
+                                <input type="text" data-profile="sam" placeholder="e.g., $5B" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>SOM</label>
+                                <input type="text" data-profile="som" placeholder="e.g., $200M" oninput="autoSaveProfile()">
+                            </div>
+                            <div class="profile-field">
+                                <label>ICP (Ideal Customer Profile)</label>
+                                <textarea data-profile="icp" placeholder="Who is your ideal customer?" oninput="autoSaveProfile()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team -->
+                    <div class="chart-card">
+                        <h3>Team</h3>
+                        <div id="teamMembers"></div>
+                        <button class="btn btn-ghost btn-sm" onclick="addTeamMember()" style="margin-top: 8px;">+ Add Team Member</button>
+                    </div>
+
+                    <!-- Licensing & Compliance -->
+                    <div class="chart-card">
+                        <h3>Licensing & Compliance</h3>
+                        <div class="profile-form" id="profileLicensing">
+                            <div class="profile-field">
+                                <label>Licenses</label>
+                                <div class="chip-input-container" data-chip-field="licenses">
+                                    <input type="text" placeholder="Type and press Enter" onkeydown="handleChipInput(event, 'licenses')">
+                                </div>
+                            </div>
+                            <div class="profile-field">
+                                <label>Compliance Notes</label>
+                                <textarea data-profile="compliance_notes" placeholder="Regulatory considerations..." oninput="autoSaveProfile()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Products -->
+                    <div class="chart-card">
+                        <h3>Key Products</h3>
+                        <div id="keyProductsList"></div>
+                        <div class="add-option-form" style="margin-top: 8px;">
+                            <input type="text" placeholder="Product name" id="newProductName">
+                            <input type="text" placeholder="Description" id="newProductDesc">
+                            <button class="btn btn-primary btn-sm" onclick="addListItem('key_products')">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Competitors -->
+                    <div class="chart-card">
+                        <h3>Competitors</h3>
+                        <div id="competitorsList"></div>
+                        <div class="add-option-form" style="margin-top: 8px;">
+                            <input type="text" placeholder="Competitor name" id="newCompetitorName">
+                            <input type="text" placeholder="Notes" id="newCompetitorDesc">
+                            <button class="btn btn-primary btn-sm" onclick="addListItem('competitors')">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Strategic Goals -->
+                    <div class="chart-card">
+                        <h3>Strategic Goals</h3>
+                        <div id="strategic_goalsList"></div>
+                        <div class="add-option-form" style="margin-top: 8px;">
+                            <input type="text" placeholder="Goal" id="newstrategic_goalsName">
+                            <input type="text" placeholder="Timeline" id="newstrategic_goalsDesc">
+                            <button class="btn btn-primary btn-sm" onclick="addListItem('strategic_goals')">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Entities -->
+                    <div class="chart-card">
+                        <h3>Corporate Entities</h3>
+                        <div id="corporate_entitiesList"></div>
+                        <div class="add-option-form" style="margin-top: 8px;">
+                            <input type="text" placeholder="Entity name" id="newcorporate_entitiesName">
+                            <input type="text" placeholder="Jurisdiction" id="newcorporate_entitiesDesc">
+                            <button class="btn btn-primary btn-sm" onclick="addListItem('corporate_entities')">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Ingested Documents -->
+                    <div class="chart-card">
+                        <h3>Ingested Documents</h3>
+                        <div id="documentsList">
+                            <div class="doc-placeholder">
+                                No documents ingested yet. Upload pitch decks, financials, or research reports.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agents Tab -->
+            <div class="tab-content" id="tab-agents">
+                <div class="agent-config">
+                    <h3>Enrichment Agent</h3>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Model</div>
+                        <div class="agent-config-value">claude-opus-4-6</div>
+                    </div>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Temperature</div>
+                        <div class="agent-config-value">0.3</div>
+                    </div>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Max Tokens</div>
+                        <div class="agent-config-value">8,192</div>
+                    </div>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Max Iterations</div>
+                        <div class="agent-config-value">10</div>
+                    </div>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Tools</div>
+                        <div class="agent-config-value">
+                            <span class="tool-badge">web_search</span>
+                            <span class="tool-badge">submit_enrichment</span>
+                        </div>
+                    </div>
+                    <div class="agent-config-row">
+                        <div class="agent-config-label">Max Searches</div>
+                        <div class="agent-config-value">8 per run</div>
+                    </div>
+                    <div class="agent-config-row" style="border-bottom: none;">
+                        <div class="agent-config-label">System Prompt</div>
+                        <div class="agent-config-value">
+                            <button class="btn btn-ghost btn-sm" onclick="toggleSystemPrompt()">Show/Hide</button>
+                        </div>
+                    </div>
+                    <div class="system-prompt" id="systemPromptContent"></div>
+                </div>
+
+                <div class="agent-config">
+                    <h3>Enrichment Runs</h3>
+                    <div id="agentRunsContainer">
+                        <div class="runs-empty">Loading runs...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Investor Modal -->
+    <div class="modal-overlay" id="investorModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Investor</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="investorId">
+                <div class="form-group">
+                    <label>Firm Name *</label>
+                    <input type="text" id="firmName" placeholder="e.g., Sequoia Capital">
+                </div>
+                <div class="form-group">
+                    <label>Contact</label>
+                    <input type="text" id="contactName" placeholder="e.g., Partner Name">
+                </div>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="url" id="firmUrl" placeholder="https://...">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Owner</label>
+                        <select id="ownerSelect"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stage</label>
+                        <select id="stageSelect"></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="prioritySelect"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fit</label>
+                        <select id="fitSelect"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Follow-up Date</label>
+                    <input type="date" id="followUpDate">
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="investorNotes" placeholder="Notes about this investor..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="modalDeleteContainer"></span>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveInvestor()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrichment Review Modal -->
+    <div class="modal-overlay enrich-modal" id="enrichModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="enrichModalTitle">Enrichment Review</h2>
+                <button class="modal-close" onclick="closeEnrichModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="enrichModalBody">
+                <div class="enrich-loading">
+                    <div class="enrich-loader"></div>
+                    <p>Running enrichment agent...</p>
+                </div>
+            </div>
+            <div class="enrich-footer" id="enrichModalFooter" style="display: none;">
+                <button class="btn btn-ghost" onclick="rejectFromModal()">Reject</button>
+                <button class="btn btn-primary" onclick="approveFromModal()">Approve & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ AUTH ============
+        const AUTH_KEY = 'chiri-auth';
+
+        function getStoredSession() {
+            try {
+                const raw = sessionStorage.getItem(AUTH_KEY);
+                if (!raw) return null;
+                const session = JSON.parse(raw);
+                if (!session.token || !session.email) return null;
+                // Check token expiry
+                const data = JSON.parse(atob(session.token));
+                if (data.exp && data.exp < Date.now()) {
+                    sessionStorage.removeItem(AUTH_KEY);
+                    return null;
+                }
+                return session;
+            } catch {
+                sessionStorage.removeItem(AUTH_KEY);
+                return null;
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorEl = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+
+            errorEl.textContent = '';
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+
+            try {
+                const res = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    errorEl.textContent = data.error || 'Login failed';
+                    btn.disabled = false;
+                    btn.textContent = 'Sign In';
+                    return;
+                }
+                sessionStorage.setItem(AUTH_KEY, JSON.stringify({ token: data.token, email: data.email }));
+                initDashboard();
+            } catch (err) {
+                errorEl.textContent = 'Network error. Please try again.';
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem(AUTH_KEY);
+            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        // ============ API HELPER ============
+        function api(path, options = {}) {
+            const session = getStoredSession();
+            if (!session) {
+                handleLogout();
+                return Promise.reject(new Error('Not authenticated'));
+            }
+            const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.token}`, ...options.headers };
+            return fetch(path, { ...options, headers }).then(async res => {
+                if (res.status === 401) {
+                    handleLogout();
+                    throw new Error('Session expired');
+                }
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'API error');
+                return data;
+            });
+        }
+
+        // ============ STATE ============
+        let investors = [];
+        let config = {
+            owners: ['NB', 'JJ'],
+            stages: [
+                { id: 'not-started', name: 'Not Started', color: '#666' },
+                { id: 'contacted', name: 'Contacted', color: '#2196F3' },
+                { id: 'responded', name: 'Responded', color: '#FF9800' },
+                { id: 'meeting-scheduled', name: 'Meeting Scheduled', color: '#9C27B0' },
+                { id: 'due-diligence', name: 'Due Diligence', color: '#6C63FF' },
+                { id: 'term-sheet', name: 'Term Sheet', color: '#4CAF50' },
+                { id: 'closed', name: 'Closed', color: '#F44336' },
+                { id: 'passed', name: 'Passed', color: '#424242' }
+            ],
+            priorities: ['High', 'Medium', 'Low'],
+            fitCategories: ['Strong', 'Moderate', 'Weak']
+        };
+        let companyProfile = {};
+        let currentEnrichInvestorId = null;
+        let enrichPollInterval = null;
+        let profileSaveTimeout = null;
+
+        // ============ INIT ============
+        function initDashboard() {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('dashboard').style.display = 'block';
+            const session = getStoredSession();
+            if (session) {
+                document.getElementById('logoutBtn').title = session.email;
+            }
+            loadConfig().then(() => loadData()).then(() => {
+                renderAll();
+                setupTabs();
+                loadCompanyProfile();
+                loadAgentRuns();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const session = getStoredSession();
+            if (session) {
+                initDashboard();
+            }
+        });
+
+        // ============ CONFIG ============
+        async function loadConfig() {
+            try {
+                const data = await api('/api/config');
+                if (data.owners) config.owners = data.owners;
+                if (data.stages) config.stages = data.stages;
+                if (data.priorities) config.priorities = data.priorities;
+                if (data.fitCategories) config.fitCategories = data.fitCategories;
+            } catch (e) {
+                console.log('Using default config:', e.message);
+            }
+        }
+
+        async function saveConfig() {
+            try {
+                await api('/api/config', {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        owners: config.owners,
+                        stages: config.stages,
+                        priorities: config.priorities,
+                        fitCategories: config.fitCategories
+                    })
+                });
+            } catch (e) {
+                console.error('Failed to save config:', e);
+            }
+        }
+
+        // ============ DATA ============
+        async function loadData() {
+            try {
+                investors = await api('/api/investors');
+            } catch (e) {
+                console.error('Failed to load investors:', e);
+                investors = [];
+            }
+        }
+
+        async function saveData() {
+            // Individual saves via API — this is a no-op for bulk
+        }
+
+        function renderAll() {
+            populateDropdowns();
+            populateFilterDropdowns();
+            renderKanban();
+            renderStats();
+            renderAnalytics();
+            renderReminders();
+            renderSettings();
+        }
+
+        // ============ DROPDOWNS ============
+        function populateDropdowns() {
+            const ownerSel = document.getElementById('ownerSelect');
+            const stageSel = document.getElementById('stageSelect');
+            const prioritySel = document.getElementById('prioritySelect');
+            const fitSel = document.getElementById('fitSelect');
+
+            ownerSel.innerHTML = config.owners.map(o => `<option value="${o}">${o}</option>`).join('');
+            stageSel.innerHTML = config.stages.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+            prioritySel.innerHTML = config.priorities.map(p => `<option value="${p}">${p}</option>`).join('');
+            fitSel.innerHTML = config.fitCategories.map(f => `<option value="${f}">${f}</option>`).join('');
+        }
+
+        function populateFilterDropdowns() {
+            const ownerFilter = document.getElementById('filterOwner');
+            const priorityFilter = document.getElementById('filterPriority');
+            const fitFilter = document.getElementById('filterFit');
+
+            const ownerVal = ownerFilter.value;
+            const priorityVal = priorityFilter.value;
+            const fitVal = fitFilter.value;
+
+            ownerFilter.innerHTML = '<option value="">All Owners</option>' + config.owners.map(o => `<option value="${o}">${o}</option>`).join('');
+            priorityFilter.innerHTML = '<option value="">All Priorities</option>' + config.priorities.map(p => `<option value="${p}">${p}</option>`).join('');
+            fitFilter.innerHTML = '<option value="">All Fit</option>' + config.fitCategories.map(f => `<option value="${f}">${f}</option>`).join('');
+
+            ownerFilter.value = ownerVal;
+            priorityFilter.value = priorityVal;
+            fitFilter.value = fitVal;
+        }
+
+        // ============ TABS ============
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+                });
+            });
+        }
+
+        function openSettingsForField(field) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-tab="settings"]').classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('tab-settings').classList.add('active');
+        }
+
+        // ============ SETTINGS ============
+        function renderSettings() {
+            // Owners
+            const ownersList = document.getElementById('ownersList');
+            ownersList.innerHTML = config.owners.map(o =>
+                `<div class="option-chip">${o}<button class="remove-option" onclick="removeOption('owners', '${o}')">&times;</button></div>`
+            ).join('');
+
+            // Stages
+            const stagesList = document.getElementById('stagesList');
+            stagesList.innerHTML = config.stages.map(s =>
+                `<div class="option-chip"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color};margin-right:4px;"></span>${s.name}<button class="remove-option" onclick="removeStage('${s.id}')">&times;</button></div>`
+            ).join('');
+
+            // Priorities
+            const prioritiesList = document.getElementById('prioritiesList');
+            prioritiesList.innerHTML = config.priorities.map(p =>
+                `<div class="option-chip">${p}<button class="remove-option" onclick="removeOption('priorities', '${p}')">&times;</button></div>`
+            ).join('');
+
+            // Fit Categories
+            const fitCategoriesList = document.getElementById('fitCategoriesList');
+            fitCategoriesList.innerHTML = config.fitCategories.map(f =>
+                `<div class="option-chip">${f}<button class="remove-option" onclick="removeOption('fitCategories', '${f}')">&times;</button></div>`
+            ).join('');
+        }
+
+        function addOption(type) {
+            const inputMap = {
+                owners: 'newOwner',
+                priorities: 'newPriority',
+                fitCategories: 'newFitCategory'
+            };
+            const input = document.getElementById(inputMap[type]);
+            const val = input.value.trim();
+            if (!val) return;
+            if (config[type].includes(val)) return;
+            config[type].push(val);
+            input.value = '';
+            saveConfig();
+            renderAll();
+        }
+
+        function removeOption(type, value) {
+            config[type] = config[type].filter(v => v !== value);
+            saveConfig();
+            renderAll();
+        }
+
+        function addStage() {
+            const nameInput = document.getElementById('newStageName');
+            const colorInput = document.getElementById('newStageColor');
+            const name = nameInput.value.trim();
+            if (!name) return;
+            const id = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+            if (config.stages.find(s => s.id === id)) return;
+            config.stages.push({ id, name, color: colorInput.value });
+            nameInput.value = '';
+            saveConfig();
+            renderAll();
+        }
+
+        function removeStage(id) {
+            config.stages = config.stages.filter(s => s.id !== id);
+            saveConfig();
+            renderAll();
+        }
+
+        // ============ KANBAN ============
+        function renderKanban() {
+            const board = document.getElementById('kanbanBoard');
+            const filtered = getFilteredInvestors();
+
+            board.innerHTML = config.stages.map(stage => {
+                const stageInvestors = filtered.filter(inv => inv.stage === stage.id);
+                return `
+                    <div class="kanban-column" data-stage="${stage.id}">
+                        <div class="column-header">
+                            <div class="column-title">
+                                <span class="dot" style="background: ${stage.color}"></span>
+                                ${stage.name}
+                            </div>
+                            <span class="column-count">${stageInvestors.length}</span>
+                        </div>
+                        <div class="column-cards" data-stage="${stage.id}"
+                             ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                            ${stageInvestors.map(inv => renderCard(inv)).join('')}
+                            ${stageInvestors.length === 0 ? '<div class="empty-state" style="padding: 20px;"><p style="font-size: 12px; color: var(--text-muted);">Drop investors here</p></div>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            setupDragAndDrop();
+        }
+
+        function renderCard(inv) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            let followUpClass = 'none';
+            let followUpText = 'No follow-up set';
+
+            if (inv.followUp) {
+                const fuDate = new Date(inv.followUp + 'T00:00:00');
+                const diff = Math.floor((fuDate - today) / (1000 * 60 * 60 * 24));
+                if (diff < 0) {
+                    followUpClass = 'overdue';
+                    followUpText = `Overdue by ${Math.abs(diff)} day${Math.abs(diff) !== 1 ? 's' : ''}`;
+                } else if (diff === 0) {
+                    followUpClass = 'today';
+                    followUpText = 'Follow-up today';
+                } else {
+                    followUpClass = 'upcoming';
+                    followUpText = `Follow-up in ${diff} day${diff !== 1 ? 's' : ''}`;
+                }
+            }
+
+            const priorityClass = `priority-${inv.priority.toLowerCase()}`;
+            const fitClass = `fit-${inv.fit.toLowerCase()}`;
+
+            let enrichBtnHtml = '';
+            if (inv.enrichmentStatus === 'running') {
+                enrichBtnHtml = `<button class="enrich-btn running"><span class="enrich-spinner"></span> Enriching...</button>`;
+            } else if (inv.enrichmentStatus === 'completed') {
+                enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); reviewEnrichment(${inv.id})" style="color: var(--warning); border-color: rgba(255,152,0,0.3); background: rgba(255,152,0,0.1);">Review</button>`;
+            } else if (inv.enrichmentStatus === 'enriched') {
+                enrichBtnHtml = `<span class="enrichment-badge enriched">Enriched</span>`;
+            } else if (inv.enrichmentStatus === 'failed') {
+                enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); enrichInvestor(${inv.id})">Retry</button>`;
+            } else {
+                enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); enrichInvestor(${inv.id})">Enrich</button>`;
+            }
+
+            const fitScoreHtml = inv.fitScore ? renderFitScoreBadge(inv.fitScore) : '';
+
+            let enrichedHtml = '';
+            if (inv.enrichmentStatus === 'enriched' && (inv.description || inv.aum || inv.investorType)) {
+                enrichedHtml = `
+                    <div class="enriched-section">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            ${fitScoreHtml}
+                            <button class="btn btn-sm btn-ghost" style="padding: 2px 6px; font-size: 10px;" onclick="event.stopPropagation(); toggleEnrichedFields(${inv.id})">Details</button>
+                        </div>
+                        <div class="enriched-fields" id="enrichedFields-${inv.id}">
+                            ${renderEnrichedData(inv)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="investor-card" draggable="true" data-id="${inv.id}"
+                     ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
+                    <div class="firm-name">
+                        <span>${escapeHtml(inv.firm)}</span>
+                        <div class="card-actions">
+                            ${enrichBtnHtml}
+                            <button onclick="event.stopPropagation(); editInvestor(${inv.id})" title="Edit">&#9998;</button>
+                            <button onclick="event.stopPropagation(); deleteInvestor(${inv.id})" title="Delete">&times;</button>
+                        </div>
+                    </div>
+                    ${inv.contact ? `<div class="contact">${escapeHtml(inv.contact)}</div>` : ''}
+                    <div class="tags">
+                        <span class="tag ${priorityClass}">${inv.priority}</span>
+                        <span class="tag ${fitClass}">${inv.fit}</span>
+                        <span class="tag owner">${inv.owner}</span>
+                    </div>
+                    <div class="follow-up ${followUpClass}">${followUpText}</div>
+                    ${enrichedHtml}
+                </div>
+            `;
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============ DRAG & DROP ============
+        function setupDragAndDrop() {
+            // Already handled via inline events
+        }
+
+        let draggedId = null;
+
+        function handleDragStart(e) {
+            draggedId = parseInt(e.target.dataset.id);
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedId);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.column-cards').forEach(col => col.classList.remove('drag-over'));
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        async function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            const newStage = e.currentTarget.dataset.stage;
+            if (!draggedId || !newStage) return;
+
+            const investor = investors.find(i => i.id === draggedId);
+            if (!investor || investor.stage === newStage) return;
+
+            investor.stage = newStage;
+            renderKanban();
+            renderStats();
+            renderAnalytics();
+
+            try {
+                await api(`/api/investors/${investor.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(investor)
+                });
+            } catch (e) {
+                console.error('Failed to update stage:', e);
+            }
+        }
+
+        function filterInvestors() {
+            renderKanban();
+        }
+
+        function getFilteredInvestors() {
+            const search = document.getElementById('searchBox').value.toLowerCase();
+            const ownerFilter = document.getElementById('filterOwner').value;
+            const priorityFilter = document.getElementById('filterPriority').value;
+            const fitFilter = document.getElementById('filterFit').value;
+
+            return investors.filter(inv => {
+                if (search && !inv.firm.toLowerCase().includes(search) && !(inv.contact || '').toLowerCase().includes(search) && !(inv.notes || '').toLowerCase().includes(search)) return false;
+                if (ownerFilter && inv.owner !== ownerFilter) return false;
+                if (priorityFilter && inv.priority !== priorityFilter) return false;
+                if (fitFilter && inv.fit !== fitFilter) return false;
+                return true;
+            });
+        }
+
+        // ============ STATS ============
+        function renderStats() {
+            document.getElementById('statTotal').textContent = investors.length;
+
+            const activeStages = ['contacted', 'responded', 'meeting-scheduled'];
+            const active = investors.filter(i => activeStages.includes(i.stage)).length;
+            document.getElementById('statActive').textContent = active;
+
+            const contacted = investors.filter(i => i.stage !== 'not-started').length;
+            const responded = investors.filter(i => !['not-started', 'contacted'].includes(i.stage)).length;
+            const rate = contacted > 0 ? Math.round((responded / contacted) * 100) : 0;
+            document.getElementById('statResponse').textContent = rate + '%';
+
+            const dd = investors.filter(i => i.stage === 'due-diligence').length;
+            document.getElementById('statDD').textContent = dd;
+
+            const terms = investors.filter(i => i.stage === 'term-sheet').length;
+            document.getElementById('statTerms').textContent = terms;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const overdue = investors.filter(i => {
+                if (!i.followUp) return false;
+                const fu = new Date(i.followUp + 'T00:00:00');
+                return fu < today;
+            }).length;
+            document.getElementById('statOverdue').textContent = overdue;
+        }
+
+        // ============ ANALYTICS ============
+        function renderAnalytics() {
+            // Funnel
+            const funnelEl = document.getElementById('funnelChart');
+            const maxCount = Math.max(1, ...config.stages.map(s => investors.filter(i => i.stage === s.id).length));
+            funnelEl.innerHTML = config.stages.map(stage => {
+                const count = investors.filter(i => i.stage === stage.id).length;
+                const pct = (count / maxCount) * 100;
+                return `
+                    <div class="funnel-row">
+                        <div class="funnel-label">${stage.name}</div>
+                        <div class="funnel-bar-bg">
+                            <div class="funnel-bar" style="width: ${pct}%; background: ${stage.color};">
+                            </div>
+                        </div>
+                        <div class="funnel-count">${count}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // Priority
+            const priorityEl = document.getElementById('priorityChart');
+            const priorityColors = { High: '#F44336', Medium: '#FF9800', Low: '#4CAF50' };
+            const maxPriority = Math.max(1, ...config.priorities.map(p => investors.filter(i => i.priority === p).length));
+            priorityEl.innerHTML = config.priorities.map(p => {
+                const count = investors.filter(i => i.priority === p).length;
+                const pct = (count / maxPriority) * 100;
+                const color = priorityColors[p] || '#666';
+                return `
+                    <div class="priority-row">
+                        <span class="priority-dot" style="background: ${color}"></span>
+                        <span class="priority-label">${p}</span>
+                        <div class="priority-bar-bg"><div class="priority-bar" style="width: ${pct}%; background: ${color};"></div></div>
+                        <span class="priority-count">${count}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Fit
+            const fitEl = document.getElementById('fitChart');
+            const fitColors = { Strong: '#6C63FF', Moderate: '#2196F3', Weak: '#9E9E9E' };
+            const maxFit = Math.max(1, ...config.fitCategories.map(f => investors.filter(i => i.fit === f).length));
+            fitEl.innerHTML = config.fitCategories.map(f => {
+                const count = investors.filter(i => i.fit === f).length;
+                const pct = (count / maxFit) * 100;
+                const color = fitColors[f] || '#666';
+                return `
+                    <div class="priority-row">
+                        <span class="priority-dot" style="background: ${color}"></span>
+                        <span class="priority-label">${f}</span>
+                        <div class="priority-bar-bg"><div class="priority-bar" style="width: ${pct}%; background: ${color};"></div></div>
+                        <span class="priority-count">${count}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Owner
+            const ownerEl = document.getElementById('ownerChart');
+            const maxOwner = Math.max(1, ...config.owners.map(o => investors.filter(i => i.owner === o).length));
+            ownerEl.innerHTML = config.owners.map(o => {
+                const count = investors.filter(i => i.owner === o).length;
+                const pct = (count / maxOwner) * 100;
+                return `
+                    <div class="priority-row">
+                        <span class="priority-dot" style="background: #6C63FF"></span>
+                        <span class="priority-label">${o}</span>
+                        <div class="priority-bar-bg"><div class="priority-bar" style="width: ${pct}%; background: #6C63FF;"></div></div>
+                        <span class="priority-count">${count}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============ REMINDERS ============
+        function clearAllReminders() {
+            if (!confirm('Clear all follow-up dates?')) return;
+            investors.forEach(inv => {
+                inv.followUp = null;
+                api(`/api/investors/${inv.id}`, { method: 'PUT', body: JSON.stringify(inv) }).catch(console.error);
+            });
+            renderAll();
+        }
+
+        function renderReminders() {
+            const list = document.getElementById('remindersList');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const withFollowUp = investors.filter(i => i.followUp).map(inv => {
+                const fu = new Date(inv.followUp + 'T00:00:00');
+                const diff = Math.floor((fu - today) / (1000 * 60 * 60 * 24));
+                let status = 'upcoming';
+                if (diff < 0) status = 'overdue';
+                else if (diff === 0) status = 'today';
+                return { ...inv, fuDate: fu, diff, status };
+            }).sort((a, b) => a.fuDate - b.fuDate);
+
+            if (withFollowUp.length === 0) {
+                list.innerHTML = `<div class="empty-state"><div class="icon">&#128197;</div><h3>No Follow-ups Set</h3><p>Set follow-up dates on investor cards to see reminders here.</p></div>`;
+                return;
+            }
+
+            list.innerHTML = withFollowUp.map(inv => {
+                const icon = inv.status === 'overdue' ? '&#9888;' : inv.status === 'today' ? '&#128276;' : '&#128197;';
+                let dateText = '';
+                if (inv.status === 'overdue') dateText = `${Math.abs(inv.diff)} day${Math.abs(inv.diff) !== 1 ? 's' : ''} overdue`;
+                else if (inv.status === 'today') dateText = 'Today';
+                else dateText = `In ${inv.diff} day${inv.diff !== 1 ? 's' : ''}`;
+
+                const stageName = config.stages.find(s => s.id === inv.stage)?.name || inv.stage;
+
+                return `
+                    <div class="reminder-item">
+                        <div class="reminder-info">
+                            <div class="reminder-icon ${inv.status}">${icon}</div>
+                            <div class="reminder-details">
+                                <h4>${escapeHtml(inv.firm)}</h4>
+                                <p>${stageName} &middot; ${inv.owner} &middot; ${inv.priority}</p>
+                            </div>
+                        </div>
+                        <div class="reminder-actions">
+                            <span class="reminder-date ${inv.status}">${dateText}</span>
+                            <button class="btn btn-ghost btn-sm" onclick="editInvestor(${inv.id})">Edit</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============ MODAL ============
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = 'Add Investor';
+            document.getElementById('investorId').value = '';
+            document.getElementById('firmName').value = '';
+            document.getElementById('contactName').value = '';
+            document.getElementById('firmUrl').value = '';
+            document.getElementById('ownerSelect').value = config.owners[0] || '';
+            document.getElementById('stageSelect').value = config.stages[0]?.id || '';
+            document.getElementById('prioritySelect').value = config.priorities[0] || '';
+            document.getElementById('fitSelect').value = config.fitCategories[0] || '';
+            document.getElementById('followUpDate').value = '';
+            document.getElementById('investorNotes').value = '';
+            document.getElementById('modalDeleteContainer').innerHTML = '';
+            document.getElementById('investorModal').classList.add('active');
+        }
+
+        function editInvestor(id) {
+            const inv = investors.find(i => i.id === id);
+            if (!inv) return;
+            document.getElementById('modalTitle').textContent = 'Edit Investor';
+            document.getElementById('investorId').value = inv.id;
+            document.getElementById('firmName').value = inv.firm;
+            document.getElementById('contactName').value = inv.contact || '';
+            document.getElementById('firmUrl').value = inv.url || '';
+            document.getElementById('ownerSelect').value = inv.owner;
+            document.getElementById('stageSelect').value = inv.stage;
+            document.getElementById('prioritySelect').value = inv.priority;
+            document.getElementById('fitSelect').value = inv.fit;
+            document.getElementById('followUpDate').value = inv.followUp || '';
+            document.getElementById('investorNotes').value = inv.notes || '';
+            document.getElementById('modalDeleteContainer').innerHTML = `<button class="btn btn-danger btn-sm" onclick="deleteInvestorFromModal(${inv.id})">Delete</button>`;
+            document.getElementById('investorModal').classList.add('active');
+        }
+
+        async function deleteInvestor(id) {
+            if (!confirm('Delete this investor?')) return;
+            try {
+                await api(`/api/investors/${id}`, { method: 'DELETE' });
+                investors = investors.filter(i => i.id !== id);
+                renderAll();
+            } catch (e) {
+                alert('Failed to delete: ' + e.message);
+            }
+        }
+
+        function deleteInvestorFromModal(id) {
+            deleteInvestor(id);
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('investorModal').classList.remove('active');
+        }
+
+        async function saveInvestor() {
+            const id = document.getElementById('investorId').value;
+            const data = {
+                firm: document.getElementById('firmName').value.trim(),
+                contact: document.getElementById('contactName').value.trim(),
+                url: document.getElementById('firmUrl').value.trim(),
+                owner: document.getElementById('ownerSelect').value,
+                stage: document.getElementById('stageSelect').value,
+                priority: document.getElementById('prioritySelect').value,
+                fit: document.getElementById('fitSelect').value,
+                followUp: document.getElementById('followUpDate').value || null,
+                notes: document.getElementById('investorNotes').value.trim()
+            };
+
+            if (!data.firm) {
+                alert('Firm name is required');
+                return;
+            }
+
+            try {
+                if (id) {
+                    const updated = await api(`/api/investors/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+                    const idx = investors.findIndex(i => i.id === parseInt(id));
+                    if (idx >= 0) investors[idx] = updated;
+                } else {
+                    const created = await api('/api/investors', { method: 'POST', body: JSON.stringify(data) });
+                    investors.push(created);
+                }
+                closeModal();
+                renderAll();
+            } catch (e) {
+                alert('Failed to save: ' + e.message);
+            }
+        }
+
+        // ============ EXPORT / RESET ============
+        function exportData() {
+            const blob = new Blob([JSON.stringify({ investors, config }, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chiri-outreach-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function exportCSV() {
+            const headers = ['Firm', 'Contact', 'Owner', 'Stage', 'Priority', 'Fit', 'Follow-up', 'URL', 'Notes', 'Enrichment Status', 'Fit Score', 'AUM', 'Location', 'Investor Type'];
+            const rows = investors.map(i => {
+                const stageName = config.stages.find(s => s.id === i.stage)?.name || i.stage;
+                return [i.firm, i.contact, i.owner, stageName, i.priority, i.fit, i.followUp || '', i.url || '', (i.notes || '').replace(/"/g, '""'), i.enrichmentStatus || '', i.fitScore || '', i.aum || '', i.location || '', i.investorType || ''];
+            });
+            const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chiri-outreach-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetData() {
+            if (!confirm('Are you sure you want to reset all data? This cannot be undone.')) return;
+            if (!confirm('FINAL WARNING: This will delete all investors. Continue?')) return;
+            investors = [];
+            renderAll();
+        }
+
+        // ============ MODAL CLICK LISTENERS ============
+        document.getElementById('investorModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+
+        document.getElementById('enrichModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeEnrichModal();
+        });
+
+        // ============ ENRICHMENT ============
+        async function enrichInvestor(id) {
+            const inv = investors.find(i => i.id === id);
+            if (!inv) return;
+
+            // Update local state immediately
+            inv.enrichmentStatus = 'running';
+            renderKanban();
+
+            // Open the modal with loading state
+            currentEnrichInvestorId = id;
+            const modal = document.getElementById('enrichModal');
+            document.getElementById('enrichModalTitle').textContent = `Enriching: ${inv.firm}`;
+            document.getElementById('enrichModalBody').innerHTML = `
+                <div class="enrich-loading">
+                    <div class="enrich-loader"></div>
+                    <p>Running enrichment agent on <strong>${escapeHtml(inv.firm)}</strong>...</p>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">This may take 30-90 seconds. The agent is searching the web and analyzing results.</p>
+                </div>
+            `;
+            document.getElementById('enrichModalFooter').style.display = 'none';
+            modal.classList.add('active');
+
+            try {
+                // Create enrichment request
+                const res = await api(`/api/investors/${id}/enrich`, { method: 'POST' });
+                const requestId = res.requestId;
+
+                // Fire off the worker (non-blocking on the backend)
+                api(`/api/investors/${id}/enrich/worker`, {
+                    method: 'POST',
+                    body: JSON.stringify({ requestId })
+                }).catch(err => {
+                    console.error('Worker call failed:', err);
+                });
+
+                // Poll for completion
+                startEnrichmentPolling(id, requestId);
+            } catch (e) {
+                inv.enrichmentStatus = 'failed';
+                renderKanban();
+                document.getElementById('enrichModalBody').innerHTML = renderEnrichmentError(e.message);
+                document.getElementById('enrichModalFooter').style.display = 'none';
+            }
+        }
+
+        function startEnrichmentPolling(investorId, requestId) {
+            if (enrichPollInterval) clearInterval(enrichPollInterval);
+
+            enrichPollInterval = setInterval(async () => {
+                try {
+                    const req = await api(`/api/investors/${investorId}/enrich`);
+                    if (!req || req.id !== requestId) return;
+
+                    if (req.status === 'completed') {
+                        clearInterval(enrichPollInterval);
+                        enrichPollInterval = null;
+
+                        const inv = investors.find(i => i.id === investorId);
+                        if (inv) inv.enrichmentStatus = 'completed';
+                        renderKanban();
+
+                        renderEnrichmentDiff(investorId, req);
+                    } else if (req.status === 'failed') {
+                        clearInterval(enrichPollInterval);
+                        enrichPollInterval = null;
+
+                        const inv = investors.find(i => i.id === investorId);
+                        if (inv) inv.enrichmentStatus = 'failed';
+                        renderKanban();
+
+                        document.getElementById('enrichModalBody').innerHTML = renderEnrichmentError(req.error || 'Enrichment failed');
+                        document.getElementById('enrichModalFooter').style.display = 'none';
+                    }
+                } catch (e) {
+                    console.error('Poll error:', e);
+                }
+            }, 3000);
+        }
+
+        function renderEnrichmentDiff(investorId, request) {
+            const inv = investors.find(i => i.id === investorId);
+            const changes = request.proposed_changes || [];
+
+            if (changes.length === 0) {
+                document.getElementById('enrichModalBody').innerHTML = `
+                    <div class="diff-summary">No enrichment data found for this investor.</div>
+                `;
+                document.getElementById('enrichModalFooter').style.display = 'none';
+                return;
+            }
+
+            const fitChanges = changes.filter(c => FIT_FIELDS.includes(c.field));
+            const dataChanges = changes.filter(c => !FIT_FIELDS.includes(c.field));
+
+            let html = '';
+            if (request.summary) {
+                html += `<div class="diff-summary">${escapeHtml(request.summary)}</div>`;
+            }
+
+            // Fit score section
+            const fitScoreChange = fitChanges.find(c => c.field === 'fit_score');
+            const fitAssessmentChange = fitChanges.find(c => c.field === 'fit_assessment');
+            const fitSignalsChange = fitChanges.find(c => c.field === 'fit_signals');
+
+            if (fitScoreChange) {
+                html += renderFitScoreSection(fitScoreChange.new_value, fitAssessmentChange?.new_value, fitSignalsChange?.new_value);
+            }
+
+            // Data changes table
+            if (dataChanges.length > 0) {
+                html += `
+                    <table class="diff-table">
+                        <thead><tr><th>Field</th><th>Current</th><th>Proposed</th><th>Confidence</th><th>Source</th></tr></thead>
+                        <tbody>
+                            ${dataChanges.map(c => `
+                                <tr>
+                                    <td class="diff-field">${FIELD_LABELS[c.field] || c.field}</td>
+                                    <td class="diff-old">${formatDiffValue(c.old_value)}</td>
+                                    <td class="diff-new">${formatDiffValue(c.new_value)}</td>
+                                    <td><span class="diff-confidence ${c.confidence}">${c.confidence}</span></td>
+                                    <td class="diff-source" title="${escapeHtml(c.source || '')}">${escapeHtml(c.source || '')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            document.getElementById('enrichModalBody').innerHTML = html;
+            document.getElementById('enrichModalFooter').style.display = 'flex';
+        }
+
+        function renderEnrichmentError(message) {
+            return `
+                <div class="diff-summary" style="border-color: rgba(244,67,54,0.3); color: var(--danger);">
+                    Enrichment failed: ${escapeHtml(message)}
+                </div>
+            `;
+        }
+
+        async function approveEnrichment(investorId) {
+            try {
+                await api(`/api/investors/${investorId}/enrich/apply`, { method: 'POST' });
+                // Reload investor data
+                await loadData();
+                renderAll();
+                closeEnrichModal();
+            } catch (e) {
+                alert('Failed to approve: ' + e.message);
+            }
+        }
+
+        async function rejectEnrichment(investorId) {
+            try {
+                await api(`/api/investors/${investorId}/enrich/cancel`, { method: 'POST' });
+                const inv = investors.find(i => i.id === investorId);
+                if (inv) inv.enrichmentStatus = 'none';
+                renderKanban();
+                closeEnrichModal();
+            } catch (e) {
+                alert('Failed to reject: ' + e.message);
+            }
+        }
+
+        function closeEnrichModal() {
+            document.getElementById('enrichModal').classList.remove('active');
+            if (enrichPollInterval) {
+                clearInterval(enrichPollInterval);
+                enrichPollInterval = null;
+            }
+            currentEnrichInvestorId = null;
+        }
+
+        function renderEnrichedData(inv) {
+            let html = '';
+            if (inv.description) html += `<div class="enriched-field"><span class="field-label">About:</span><span class="field-value">${escapeHtml(inv.description)}</span></div>`;
+            if (inv.aum) html += `<div class="enriched-field"><span class="field-label">AUM:</span><span class="field-value">${escapeHtml(inv.aum)}</span></div>`;
+            if (inv.investorType) html += `<div class="enriched-field"><span class="field-label">Type:</span><span class="field-value">${escapeHtml(inv.investorType)}</span></div>`;
+            if (inv.location) html += `<div class="enriched-field"><span class="field-label">Location:</span><span class="field-value">${escapeHtml(inv.location)}</span></div>`;
+            if (inv.investmentFocus) html += `<div class="enriched-field"><span class="field-label">Focus:</span><span class="field-value">${escapeHtml(inv.investmentFocus)}</span></div>`;
+            if (inv.fundStage) html += `<div class="enriched-field"><span class="field-label">Stages:</span><span class="field-value">${escapeHtml(inv.fundStage)}</span></div>`;
+            if (inv.checkSizeMin || inv.checkSizeMax) {
+                const min = inv.checkSizeMin ? `$${(inv.checkSizeMin / 1000000).toFixed(1)}M` : '?';
+                const max = inv.checkSizeMax ? `$${(inv.checkSizeMax / 1000000).toFixed(1)}M` : '?';
+                html += `<div class="enriched-field"><span class="field-label">Check:</span><span class="field-value">${min} - ${max}</span></div>`;
+            }
+            if (inv.portfolioCompanies && inv.portfolioCompanies.length > 0) {
+                html += `<div class="portfolio-list">${inv.portfolioCompanies.slice(0, 5).map(p => `<span class="portfolio-tag">${escapeHtml(typeof p === 'string' ? p : p.name)}</span>`).join('')}</div>`;
+            }
+            if (inv.fitAssessment) {
+                html += `<div class="enriched-field" style="margin-top: 4px;"><span class="field-value" style="color: var(--text-secondary); font-style: italic;">${escapeHtml(inv.fitAssessment)}</span></div>`;
+            }
+            return html;
+        }
+
+        function approveFromModal() {
+            if (currentEnrichInvestorId) approveEnrichment(currentEnrichInvestorId);
+        }
+
+        function rejectFromModal() {
+            if (currentEnrichInvestorId) rejectEnrichment(currentEnrichInvestorId);
+        }
+
+        function toggleEnrichedFields(id) {
+            const el = document.getElementById(`enrichedFields-${id}`);
+            if (el) el.classList.toggle('visible');
+        }
+
+        async function reviewEnrichment(id) {
+            currentEnrichInvestorId = id;
+            const inv = investors.find(i => i.id === id);
+            if (!inv) return;
+
+            const modal = document.getElementById('enrichModal');
+            document.getElementById('enrichModalTitle').textContent = `Review: ${inv.firm}`;
+            document.getElementById('enrichModalBody').innerHTML = `<div class="enrich-loading"><div class="enrich-loader"></div><p>Loading review data...</p></div>`;
+            document.getElementById('enrichModalFooter').style.display = 'none';
+            modal.classList.add('active');
+
+            try {
+                const req = await api(`/api/investors/${id}/enrich`);
+                if (req && req.status === 'completed') {
+                    renderEnrichmentDiff(id, req);
+                } else if (req && req.status === 'running') {
+                    startEnrichmentPolling(id, req.id);
+                } else {
+                    document.getElementById('enrichModalBody').innerHTML = `<div class="diff-summary">No enrichment data available.</div>`;
+                }
+            } catch (e) {
+                document.getElementById('enrichModalBody').innerHTML = renderEnrichmentError(e.message);
+            }
+        }
+
+        // ============ FIELD LABELS & FIT HELPERS ============
+        const FIELD_LABELS = {
+            description: 'Description',
+            aum: 'AUM',
+            investment_focus: 'Investment Focus',
+            check_size_min: 'Min Check Size',
+            check_size_max: 'Max Check Size',
+            fund_stage: 'Fund Stage',
+            portfolio_companies: 'Portfolio',
+            investor_type: 'Investor Type',
+            location: 'Location',
+            linkedin_url: 'LinkedIn',
+            twitter_url: 'Twitter/X',
+            website: 'Website',
+            fit_score: 'Fit Score',
+            fit_assessment: 'Fit Assessment',
+            fit_signals: 'Fit Signals'
+        };
+
+        const FIT_FIELDS = ['fit_score', 'fit_assessment', 'fit_signals'];
+
+        function getFitClass(score) {
+            if (score >= 90) return 'exceptional';
+            if (score >= 70) return 'strong';
+            if (score >= 50) return 'moderate';
+            if (score >= 30) return 'weak';
+            return 'poor';
+        }
+
+        function getFitLabel(score) {
+            if (score >= 90) return 'Exceptional';
+            if (score >= 70) return 'Strong';
+            if (score >= 50) return 'Moderate';
+            if (score >= 30) return 'Weak';
+            return 'Poor';
+        }
+
+        function renderFitScoreBadge(score) {
+            if (!score && score !== 0) return '';
+            const cls = getFitClass(score);
+            const label = getFitLabel(score);
+            return `<span class="fit-score-badge ${cls}">${score} ${label}</span>`;
+        }
+
+        function renderFitScoreSection(score, assessment, signals) {
+            if (!score && score !== 0) return '';
+            const cls = getFitClass(score);
+            const label = getFitLabel(score);
+
+            let signalsHtml = '';
+            if (signals && Array.isArray(signals)) {
+                signalsHtml = `
+                    <div class="fit-signals-list">
+                        ${signals.map(s => {
+                            const icon = s.sentiment === 'positive' ? '+' : s.sentiment === 'negative' ? '-' : '~';
+                            return `
+                                <div class="fit-signal">
+                                    <span class="fit-signal-icon ${s.sentiment}">${icon}</span>
+                                    <span><strong>${escapeHtml(s.signal)}:</strong> ${escapeHtml(s.detail)}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="fit-score-section">
+                    <div class="fit-score-header">
+                        <span class="fit-score-number ${cls}">${score}</span>
+                        <div>
+                            <div class="fit-score-label">${label} Fit</div>
+                        </div>
+                    </div>
+                    ${assessment ? `<div class="fit-assessment-text">${escapeHtml(assessment)}</div>` : ''}
+                    ${signalsHtml}
+                </div>
+            `;
+        }
+
+        function formatDiffValue(value) {
+            if (value === null || value === undefined || value === '') return '<em style="color: var(--text-muted);">empty</em>';
+            if (Array.isArray(value)) {
+                if (value.length === 0) return '<em style="color: var(--text-muted);">empty</em>';
+                return value.map(v => typeof v === 'object' ? (v.name || JSON.stringify(v)) : v).join(', ');
+            }
+            if (typeof value === 'number') {
+                if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`;
+                if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`;
+                return String(value);
+            }
+            return escapeHtml(String(value));
+        }
+
+        // ============ COMPANY PROFILE ============
+        const PROFILE_FIELDS = {
+            name: 'name', description: 'description', industry: 'industry', sector: 'sector',
+            location: 'location', website: 'website', founded: 'founded', stage: 'stage',
+            raise_amount: 'raise_amount', pre_money_valuation: 'pre_money_valuation',
+            instrument: 'instrument', use_of_funds: 'use_of_funds',
+            arr: 'arr', mrr_growth: 'mrr_growth', customers: 'customers',
+            burn_rate: 'burn_rate', runway: 'runway',
+            moat: 'moat', competitive_advantages: 'competitive_advantages', why_now: 'why_now',
+            tam: 'tam', sam: 'sam', som: 'som', icp: 'icp',
+            compliance_notes: 'compliance_notes'
+        };
+
+        const CHIP_FIELDS = ['target_investor_types', 'licenses'];
+
+        async function loadCompanyProfile() {
+            try {
+                companyProfile = await api('/api/company-profile');
+                renderCompanyProfile();
+            } catch (e) {
+                console.error('Failed to load profile:', e);
+            }
+        }
+
+        function renderCompanyProfile() {
+            // Simple text fields
+            document.querySelectorAll('[data-profile]').forEach(el => {
+                const field = el.dataset.profile;
+                el.value = companyProfile[field] || '';
+            });
+
+            // Chip fields
+            CHIP_FIELDS.forEach(field => {
+                const container = document.querySelector(`[data-chip-field="${field}"]`);
+                if (!container) return;
+                const chips = container.querySelectorAll('.chip');
+                chips.forEach(c => c.remove());
+                const values = companyProfile[field] || [];
+                const input = container.querySelector('input');
+                values.forEach(v => {
+                    const chip = document.createElement('span');
+                    chip.className = 'chip';
+                    chip.innerHTML = `${escapeHtml(v)}<button class="remove-chip" onclick="removeChip('${field}', '${escapeHtml(v)}')">&times;</button>`;
+                    container.insertBefore(chip, input);
+                });
+            });
+
+            // Team members
+            renderTeamMembers();
+
+            // List sections
+            LIST_SECTIONS.forEach(s => renderListSection(s));
+
+            // Documents
+            renderDocuments();
+        }
+
+        function collectProfileData() {
+            const data = { ...companyProfile };
+            document.querySelectorAll('[data-profile]').forEach(el => {
+                data[el.dataset.profile] = el.value;
+            });
+            // Chip fields are already in companyProfile
+            CHIP_FIELDS.forEach(field => {
+                if (!data[field]) data[field] = companyProfile[field] || [];
+            });
+            return data;
+        }
+
+        function autoSaveProfile() {
+            if (profileSaveTimeout) clearTimeout(profileSaveTimeout);
+            profileSaveTimeout = setTimeout(async () => {
+                companyProfile = collectProfileData();
+                const statusEl = document.getElementById('profileSaveStatus');
+                try {
+                    await api('/api/company-profile', { method: 'PUT', body: JSON.stringify(companyProfile) });
+                    statusEl.textContent = 'Saved';
+                    statusEl.classList.add('visible');
+                    setTimeout(() => statusEl.classList.remove('visible'), 2000);
+                } catch (e) {
+                    statusEl.textContent = 'Save failed';
+                    statusEl.style.color = 'var(--danger)';
+                    statusEl.classList.add('visible');
+                    setTimeout(() => {
+                        statusEl.classList.remove('visible');
+                        statusEl.style.color = '';
+                    }, 3000);
+                }
+            }, 800);
+        }
+
+        function handleChipInput(e, field) {
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            const val = e.target.value.trim();
+            if (!val) return;
+            if (!companyProfile[field]) companyProfile[field] = [];
+            if (companyProfile[field].includes(val)) return;
+            companyProfile[field].push(val);
+            e.target.value = '';
+            renderCompanyProfile();
+            autoSaveProfile();
+        }
+
+        function removeChip(field, value) {
+            if (!companyProfile[field]) return;
+            companyProfile[field] = companyProfile[field].filter(v => v !== value);
+            renderCompanyProfile();
+            autoSaveProfile();
+        }
+
+        // Team members
+        function renderTeamMembers() {
+            const container = document.getElementById('teamMembers');
+            const members = companyProfile.team || [];
+            container.innerHTML = members.map((m, i) => `
+                <div class="team-member-card" style="margin-bottom: 8px;">
+                    <input type="text" value="${escapeHtml(m.name || '')}" placeholder="Name" onchange="updateTeamMember(${i}, 'name', this.value)">
+                    <input type="text" value="${escapeHtml(m.role || '')}" placeholder="Role" onchange="updateTeamMember(${i}, 'role', this.value)">
+                    <button onclick="removeTeamMember(${i})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function addTeamMember() {
+            if (!companyProfile.team) companyProfile.team = [];
+            companyProfile.team.push({ name: '', role: '' });
+            renderTeamMembers();
+        }
+
+        window.updateTeamMember = function(index, field, value) {
+            if (!companyProfile.team || !companyProfile.team[index]) return;
+            companyProfile.team[index][field] = value;
+            autoSaveProfile();
+        };
+
+        window.removeTeamMember = function(index) {
+            if (!companyProfile.team) return;
+            companyProfile.team.splice(index, 1);
+            renderTeamMembers();
+            autoSaveProfile();
+        };
+
+        // List sections
+        const LIST_SECTIONS = ['key_products', 'competitors', 'strategic_goals', 'corporate_entities'];
+
+        function renderListSection(section) {
+            const container = document.getElementById(`${section}List`);
+            if (!container) return;
+            const items = companyProfile[section] || [];
+            container.innerHTML = items.map((item, i) => `
+                <div class="option-chip" style="margin-bottom: 4px;">
+                    <strong>${escapeHtml(item.name || '')}</strong>${item.description ? ` - ${escapeHtml(item.description)}` : ''}
+                    <button class="remove-option" onclick="removeListItem('${section}', ${i})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function addListItem(section) {
+            const nameInput = document.getElementById(`new${section.charAt(0).toUpperCase() + section.slice(1)}Name`) ||
+                              document.getElementById(`new${section}Name`);
+            const descInput = document.getElementById(`new${section.charAt(0).toUpperCase() + section.slice(1)}Desc`) ||
+                              document.getElementById(`new${section}Desc`);
+
+            // Try alternate IDs for camelCase vs snake_case
+            let name = '', desc = '';
+            if (nameInput) name = nameInput.value.trim();
+            if (descInput) desc = descInput.value.trim();
+
+            // Fallback: try getElementById with exact IDs used in HTML
+            if (!name) {
+                const alt = document.getElementById(`new${section}Name`);
+                if (alt) name = alt.value.trim();
+            }
+
+            if (!name) return;
+
+            if (!companyProfile[section]) companyProfile[section] = [];
+            companyProfile[section].push({ name, description: desc });
+
+            if (nameInput) nameInput.value = '';
+            if (descInput) descInput.value = '';
+
+            renderListSection(section);
+            autoSaveProfile();
+        }
+
+        function removeListItem(section, index) {
+            if (!companyProfile[section]) return;
+            companyProfile[section].splice(index, 1);
+            renderListSection(section);
+            autoSaveProfile();
+        }
+
+        function renderDocuments() {
+            const container = document.getElementById('documentsList');
+            const docs = companyProfile.documents || [];
+            if (docs.length === 0) {
+                container.innerHTML = `<div class="doc-placeholder">No documents ingested yet. Upload pitch decks, financials, or research reports.</div>`;
+                return;
+            }
+            container.innerHTML = docs.map(d => `
+                <div class="option-chip" style="margin-bottom: 4px;">
+                    ${escapeHtml(d.name || d)}
+                </div>
+            `).join('');
+        }
+
+        // ============ AGENTS TAB ============
+        const ENRICHMENT_SYSTEM_PROMPT = `You are an investor enrichment specialist for Chiri, the AI enterprise autopilot platform that observes business processes, deploys digital workers, and captures labor budget. Your job is to research investor firms and propose verified data updates for operator review.
+
+## Execution Protocol
+
+### Step 1 - Read the Record
+You will receive the current investor record as context. Identify which fields are empty or contain only basic data - those are your enrichment targets.
+
+### Step 2 - Targeted Research
+Run 3-5 focused web searches using specific, quoted terms:
+1. "<firm name>" site:crunchbase.com - funding info, portfolio, description
+2. "<firm name>" investor fund AUM assets under management
+3. "<firm name>" portfolio companies investments
+4. "<firm name>" check size investment thesis strategy
+5. "<firm name>" "<contact name>" - if contact is known
+
+Focus on tier-A/B sources (Crunchbase, PitchBook, SEC, LinkedIn, Bloomberg, TechCrunch, official firm website).
+
+### Step 3 - Validate & Score Confidence
+Assign confidence: high (2+ sources or official source), medium (single reputable source), low (inferred/outdated).
+Only propose high or medium confidence updates.
+
+### Step 4 - Submit Updates
+Call submit_enrichment EXACTLY ONCE with all verified updates AND the fit score.
+
+Enrichable fields:
+- description: Brief firm description (2-3 sentences)
+- aum: Assets under management (e.g., "$2.5B")
+- investment_focus: Thesis/focus areas comma-separated
+- check_size_min: Min check size USD as integer
+- check_size_max: Max check size USD as integer
+- fund_stage: Stage preferences (e.g., "Seed, Series A, Series B")
+- portfolio_companies: Array max 10: [{"name": "Company", "url": "https://..."}]
+- investor_type: e.g., "VC", "PE", "Growth Equity", "Family Office"
+- location: HQ location
+- linkedin_url: LinkedIn company page URL (verified from search)
+- twitter_url: Twitter/X URL (verified from search)
+- website: Official website URL (verified from search)
+
+### Step 4b - Score Investor-Company Fit
+Using the enriched investor data AND the company profile provided in your context, evaluate how well this investor matches the company's current raise. Generate:
+- fit_score (0-100 integer)
+- fit_assessment: 2-3 sentence explanation of the score
+- fit_signals: Array of scoring dimensions with signal, sentiment, and detail
+
+### Step 5 - Report
+Brief summary: what was found, sources, what couldn't be enriched. Include the fit score and key reasons.
+
+## Rules
+- Never fabricate data. Empty enrichment is better than wrong.
+- Prefer recency. Use most recent source for conflicts.
+- Be specific with dollar amounts.
+- Check sizes as integers. Portfolio max 10.
+- Only include verified URLs from search results.
+- Be token-efficient. No narration.`;
+
+        let agentRuns = [];
+
+        async function loadAgentRuns() {
+            try {
+                agentRuns = await api('/api/agents/runs');
+                renderAgentRuns();
+            } catch (e) {
+                console.log('No agent runs yet:', e.message);
+                agentRuns = [];
+                renderAgentRuns();
+            }
+        }
+
+        function renderAgentRuns() {
+            const container = document.getElementById('agentRunsContainer');
+
+            if (agentRuns.length === 0) {
+                container.innerHTML = `<div class="runs-empty">No enrichment runs yet. Enrich an investor from the pipeline to see runs here.</div>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <table class="runs-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Investor</th>
+                            <th>Status</th>
+                            <th>Changes</th>
+                            <th>Requested By</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${agentRuns.map(run => {
+                            const changes = run.proposed_changes || [];
+                            const date = run.created_at ? new Date(run.created_at).toLocaleString() : '';
+                            const changesText = changes.length > 0 ? `${changes.length} field${changes.length !== 1 ? 's' : ''}` : '-';
+                            return `
+                                <tr>
+                                    <td>#${run.id}</td>
+                                    <td>${escapeHtml(run.firm || `Investor ${run.investor_id}`)}</td>
+                                    <td><span class="run-status ${run.status}">${run.status}</span></td>
+                                    <td class="run-changes-mini">${changesText}</td>
+                                    <td>${escapeHtml(run.requested_by || '')}</td>
+                                    <td style="font-size: 12px; color: var(--text-secondary);">${date}</td>
+                                    <td><button class="run-expand" onclick="toggleRunDetail(${run.id})">&#9660;</button></td>
+                                </tr>
+                                <tr><td colspan="7" style="padding: 0;">
+                                    <div class="run-detail" id="runDetail-${run.id}">
+                                        ${renderRunDetail(run)}
+                                    </div>
+                                </td></tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderRunDetail(run) {
+            let html = '';
+            if (run.summary) {
+                html += `<p style="margin-bottom: 8px;">${escapeHtml(run.summary)}</p>`;
+            }
+            if (run.error) {
+                html += `<p style="color: var(--danger);">Error: ${escapeHtml(run.error)}</p>`;
+            }
+            const changes = run.proposed_changes || [];
+            if (changes.length > 0) {
+                html += `<table class="diff-table" style="margin-top: 8px;">
+                    <thead><tr><th>Field</th><th>Value</th><th>Confidence</th></tr></thead>
+                    <tbody>${changes.map(c => `
+                        <tr>
+                            <td class="diff-field">${FIELD_LABELS[c.field] || c.field}</td>
+                            <td class="diff-new">${formatDiffValue(c.new_value)}</td>
+                            <td><span class="diff-confidence ${c.confidence || ''}">${c.confidence || ''}</span></td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>`;
+            }
+            if (run.reviewed_by) {
+                html += `<p style="margin-top: 8px; font-size: 11px; color: var(--text-muted);">Reviewed by ${escapeHtml(run.reviewed_by)} at ${run.reviewed_at ? new Date(run.reviewed_at).toLocaleString() : 'unknown'}</p>`;
+            }
+            return html || '<p style="color: var(--text-muted);">No details available.</p>';
+        }
+
+        function toggleRunDetail(id) {
+            const el = document.getElementById(`runDetail-${id}`);
+            if (el) el.classList.toggle('visible');
+        }
+
+        function toggleSystemPrompt() {
+            const el = document.getElementById('systemPromptContent');
+            if (!el.textContent) {
+                el.textContent = ENRICHMENT_SYSTEM_PROMPT;
+            }
+            el.classList.toggle('visible');
+        }
+    </script>
+</body>
+</html>
