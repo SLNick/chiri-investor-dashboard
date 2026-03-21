@@ -76,5 +76,40 @@ export default async function handler(req, res) {
     )
   `;
 
+  // Discovery requests table
+  await sql`
+    CREATE TABLE IF NOT EXISTS discovery_requests (
+      id SERIAL PRIMARY KEY,
+      status TEXT DEFAULT 'pending',
+      candidate_count INTEGER DEFAULT 0,
+      error TEXT,
+      requested_by TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      completed_at TIMESTAMPTZ
+    )
+  `;
+
+  // Discovery candidates table
+  await sql`
+    CREATE TABLE IF NOT EXISTS discovery_candidates (
+      id SERIAL PRIMARY KEY,
+      request_id INTEGER NOT NULL REFERENCES discovery_requests(id) ON DELETE CASCADE,
+      firm_name TEXT NOT NULL,
+      contact_name TEXT DEFAULT '',
+      investor_type TEXT DEFAULT '',
+      rationale TEXT DEFAULT '',
+      thesis_alignment TEXT DEFAULT '',
+      location TEXT DEFAULT '',
+      check_size_min BIGINT,
+      check_size_max BIGINT,
+      website TEXT DEFAULT '',
+      source_url TEXT DEFAULT '',
+      source_name TEXT DEFAULT '',
+      status TEXT DEFAULT 'pending',
+      investor_id INTEGER,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
+
   return res.status(200).json({ message: 'Tables created successfully' });
 }

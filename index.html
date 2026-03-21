@@ -1701,6 +1701,17 @@
         }
 
         /* Agents Tab */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .agents-grid { grid-template-columns: 1fr; }
+        }
+
         .agent-config {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -1893,6 +1904,391 @@
             border-color: var(--primary);
             color: var(--text-secondary);
         }
+
+        /* Detail Modal (double-click card) */
+        .detail-modal .modal {
+            max-width: 720px;
+        }
+
+        .detail-modal .modal-body {
+            max-height: 75vh;
+            padding: 0;
+        }
+
+        .detail-hero {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-hero-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .detail-firm-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+        }
+
+        .detail-contact {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .detail-fit-badge {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .detail-fit-score {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .detail-fit-score.exceptional { color: #4CAF50; }
+        .detail-fit-score.strong { color: #8BC34A; }
+        .detail-fit-score.moderate { color: #FF9800; }
+        .detail-fit-score.weak { color: #F44336; }
+        .detail-fit-score.poor { color: #9E9E9E; }
+
+        .detail-fit-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .detail-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .detail-section {
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-section:last-child {
+            border-bottom: none;
+        }
+
+        .detail-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 24px;
+        }
+
+        .detail-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .detail-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .detail-field-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-field-value {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .detail-field-value a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .detail-field-value a:hover {
+            text-decoration: underline;
+        }
+
+        .detail-notes {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+            white-space: pre-wrap;
+        }
+
+        .detail-portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .detail-portfolio-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: rgba(255, 109, 53, 0.1);
+            border: 1px solid rgba(255, 109, 53, 0.2);
+            border-radius: 20px;
+            color: var(--primary-light);
+        }
+
+        .detail-signals {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .detail-signal {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .detail-signal-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 1px;
+        }
+
+        .detail-signal-icon.positive {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+        }
+
+        .detail-signal-icon.negative {
+            background: rgba(244, 67, 54, 0.15);
+            color: #E57373;
+        }
+
+        .detail-signal-icon.neutral {
+            background: rgba(255, 152, 0, 0.15);
+            color: #FFB74D;
+        }
+
+        .detail-assessment {
+            background: var(--darker);
+            border-left: 3px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .detail-footer {
+            padding: 16px 28px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-footer-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Discovery Agent */
+        .discovery-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .discovery-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .discovery-trigger {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-discover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-discover:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-discover:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .discovery-status {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .discovery-candidates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px;
+        }
+
+        .candidate-card {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            transition: all var(--transition);
+        }
+
+        .candidate-card:hover { border-color: rgba(255, 109, 53, 0.3); }
+        .candidate-card.approved { border-color: var(--success); opacity: 0.6; }
+        .candidate-card.rejected { border-color: var(--danger); opacity: 0.4; }
+
+        .candidate-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .candidate-firm {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .candidate-type {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(255, 109, 53, 0.12);
+            color: var(--primary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .candidate-rationale {
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .candidate-thesis {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .candidate-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .candidate-meta span { display: flex; align-items: center; gap: 3px; }
+
+        .candidate-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .candidate-actions button {
+            flex: 1;
+            padding: 6px 0;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .candidate-actions .btn-approve:hover { background: rgba(76, 175, 80, 0.15); border-color: var(--success); color: var(--success); }
+        .candidate-actions .btn-reject:hover { background: rgba(244, 67, 54, 0.15); border-color: var(--danger); color: var(--danger); }
+
+        .candidate-status-badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .candidate-status-badge.approved { background: rgba(76, 175, 80, 0.15); color: #81C784; }
+        .candidate-status-badge.rejected { background: rgba(244, 67, 54, 0.15); color: #E57373; }
+
+        .btn-approve-all {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .btn-approve-all:hover { background: rgba(76, 175, 80, 0.2); }
     </style>
 </head>
 <body>
@@ -2281,42 +2677,86 @@
 
             <!-- Agents Tab -->
             <div class="tab-content" id="tab-agents">
-                <div class="agent-config">
-                    <h3>Enrichment Agent</h3>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Model</div>
-                        <div class="agent-config-value">claude-opus-4-6</div>
-                    </div>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Temperature</div>
-                        <div class="agent-config-value">0.3</div>
-                    </div>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Max Tokens</div>
-                        <div class="agent-config-value">8,192</div>
-                    </div>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Max Iterations</div>
-                        <div class="agent-config-value">10</div>
-                    </div>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Tools</div>
-                        <div class="agent-config-value">
-                            <span class="tool-badge">web_search</span>
-                            <span class="tool-badge">submit_enrichment</span>
+                <div class="agents-grid">
+                    <div class="agent-config">
+                        <h3>Enrichment Agent</h3>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Model</div>
+                            <div class="agent-config-value">claude-opus-4-6</div>
                         </div>
-                    </div>
-                    <div class="agent-config-row">
-                        <div class="agent-config-label">Max Searches</div>
-                        <div class="agent-config-value">8 per run</div>
-                    </div>
-                    <div class="agent-config-row" style="border-bottom: none;">
-                        <div class="agent-config-label">System Prompt</div>
-                        <div class="agent-config-value">
-                            <button class="btn btn-ghost btn-sm" onclick="toggleSystemPrompt()">Show/Hide</button>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Temperature</div>
+                            <div class="agent-config-value">0.3</div>
                         </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Max Tokens</div>
+                            <div class="agent-config-value">8,192</div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Tools</div>
+                            <div class="agent-config-value">
+                                <span class="tool-badge">web_search</span>
+                                <span class="tool-badge">submit_enrichment</span>
+                            </div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Max Searches</div>
+                            <div class="agent-config-value">8 per run</div>
+                        </div>
+                        <div class="agent-config-row" style="border-bottom: none;">
+                            <div class="agent-config-label">System Prompt</div>
+                            <div class="agent-config-value">
+                                <button class="btn btn-ghost btn-sm" onclick="toggleSystemPrompt()">Show/Hide</button>
+                            </div>
+                        </div>
+                        <div class="system-prompt" id="systemPromptContent"></div>
                     </div>
-                    <div class="system-prompt" id="systemPromptContent"></div>
+
+                    <div class="agent-config">
+                        <h3>Discovery Agent</h3>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Model</div>
+                            <div class="agent-config-value">claude-opus-4-6</div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Temperature</div>
+                            <div class="agent-config-value">0.4</div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Output</div>
+                            <div class="agent-config-value">~20 investor candidates</div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Max Duration</div>
+                            <div class="agent-config-value">300s</div>
+                        </div>
+                        <div class="agent-config-row">
+                            <div class="agent-config-label">Tools</div>
+                            <div class="agent-config-value">
+                                <span class="tool-badge">web_search</span>
+                                <span class="tool-badge">submit_discovery</span>
+                            </div>
+                        </div>
+                        <div class="agent-config-row" style="border-bottom: none;">
+                            <div class="agent-config-label">System Prompt</div>
+                            <div class="agent-config-value">
+                                <button class="btn btn-ghost btn-sm" onclick="toggleDiscoveryPrompt()">Show/Hide</button>
+                            </div>
+                        </div>
+                        <div class="system-prompt" id="discoveryPromptContent"></div>
+                    </div>
+                </div>
+
+                <div class="discovery-section">
+                    <h3>Investor Discovery</h3>
+                    <div class="discovery-trigger">
+                        <button class="btn-discover" id="discoverBtn" onclick="runDiscovery()">
+                            <span>&#x1F50D;</span> Discover Investors
+                        </button>
+                        <span class="discovery-status" id="discoveryStatus"></span>
+                        <button class="btn-approve-all" id="approveAllBtn" style="display:none; margin-left: auto;" onclick="approveAllCandidates()">Approve All Pending</button>
+                    </div>
+                    <div id="discoveryResults"></div>
                 </div>
 
                 <div class="agent-config">
@@ -2405,6 +2845,24 @@
             <div class="enrich-footer" id="enrichModalFooter" style="display: none;">
                 <button class="btn btn-ghost" onclick="rejectFromModal()">Reject</button>
                 <button class="btn btn-primary" onclick="approveFromModal()">Approve & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investor Detail Modal (double-click) -->
+    <div class="modal-overlay detail-modal" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="detailModalTitle">Investor Details</h2>
+                <button class="modal-close" onclick="closeDetailModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="detailModalBody"></div>
+            <div class="detail-footer" id="detailModalFooter">
+                <span class="detail-footer-meta" id="detailModalMeta"></span>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-ghost" onclick="closeDetailModal()">Close</button>
+                    <button class="btn btn-primary" id="detailEditBtn">Edit</button>
+                </div>
             </div>
         </div>
     </div>
@@ -2733,6 +3191,15 @@
             }).join('');
 
             setupDragAndDrop();
+
+            // Bind double-click to open detail modal
+            board.querySelectorAll('.investor-card').forEach(card => {
+                card.addEventListener('dblclick', (e) => {
+                    e.preventDefault();
+                    const id = parseInt(card.dataset.id);
+                    if (id) showInvestorDetail(id);
+                });
+            });
         }
 
         function renderCard(inv) {
@@ -2765,7 +3232,7 @@
             } else if (inv.enrichmentStatus === 'completed') {
                 enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); reviewEnrichment(${inv.id})" style="color: var(--warning); border-color: rgba(255,152,0,0.3); background: rgba(255,152,0,0.1);">Review</button>`;
             } else if (inv.enrichmentStatus === 'enriched') {
-                enrichBtnHtml = `<span class="enrichment-badge enriched">Enriched</span>`;
+                enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); enrichInvestor(${inv.id})" style="color: var(--success); border-color: rgba(76,175,80,0.3); background: rgba(76,175,80,0.1);" title="Re-run enrichment agent">&#x21bb; Re-enrich</button>`;
             } else if (inv.enrichmentStatus === 'failed') {
                 enrichBtnHtml = `<button class="enrich-btn" onclick="event.stopPropagation(); enrichInvestor(${inv.id})">Retry</button>`;
             } else {
@@ -2780,7 +3247,7 @@
                     <div class="enriched-section">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
                             ${fitScoreHtml}
-                            <button class="btn btn-sm btn-ghost" style="padding: 2px 6px; font-size: 10px;" onclick="event.stopPropagation(); toggleEnrichedFields(${inv.id})">Details</button>
+                            <button class="btn btn-sm btn-ghost" style="padding: 2px 6px; font-size: 10px;" onclick="event.stopPropagation(); showInvestorDetail(${inv.id})">Details</button>
                         </div>
                         <div class="enriched-fields" id="enrichedFields-${inv.id}">
                             ${renderEnrichedData(inv)}
@@ -2791,7 +3258,8 @@
 
             return `
                 <div class="investor-card" draggable="true" data-id="${inv.id}"
-                     ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
+                     ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)"
+                     ondblclick="showInvestorDetail(${inv.id})"
                     <div class="firm-name">
                         <span>${escapeHtml(inv.firm)}</span>
                         <div class="card-actions">
@@ -3390,6 +3858,178 @@
             if (el) el.classList.toggle('visible');
         }
 
+        // ============ INVESTOR DETAIL MODAL ============
+        function showInvestorDetail(id) {
+            const inv = investors.find(i => i.id === id);
+            if (!inv) return;
+
+            document.getElementById('detailModalTitle').textContent = inv.firm;
+
+            // Fit score badge
+            let fitBadgeHtml = '';
+            if (inv.fitScore || inv.fitScore === 0) {
+                const cls = getFitClass(inv.fitScore);
+                const label = getFitLabel(inv.fitScore);
+                fitBadgeHtml = `
+                    <div class="detail-fit-badge">
+                        <span class="detail-fit-score ${cls}">${inv.fitScore}</span>
+                        <span class="detail-fit-label" style="color: var(--text-muted);">${label} Fit</span>
+                    </div>
+                `;
+            }
+
+            // Tags
+            const priorityColors = { high: 'var(--danger)', medium: 'var(--warning)', low: 'var(--success)' };
+            const fitColors = { strong: '#8BC34A', moderate: '#FF9800', weak: '#F44336' };
+            const pColor = priorityColors[inv.priority?.toLowerCase()] || 'var(--text-muted)';
+            const fColor = fitColors[inv.fit?.toLowerCase()] || 'var(--text-muted)';
+
+            // Follow-up
+            let followUpHtml = 'Not set';
+            if (inv.followUp) {
+                const today = new Date(); today.setHours(0,0,0,0);
+                const fuDate = new Date(inv.followUp + 'T00:00:00');
+                const diff = Math.floor((fuDate - today) / (1000*60*60*24));
+                const dateStr = fuDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+                if (diff < 0) followUpHtml = `<span style="color: var(--danger);">${dateStr} (overdue by ${Math.abs(diff)} days)</span>`;
+                else if (diff === 0) followUpHtml = `<span style="color: var(--warning);">${dateStr} (today)</span>`;
+                else followUpHtml = `<span>${dateStr} (in ${diff} days)</span>`;
+            }
+
+            // Hero section
+            let html = `
+                <div class="detail-hero">
+                    <div class="detail-hero-top">
+                        <div>
+                            <div class="detail-firm-name">${escapeHtml(inv.firm)}</div>
+                            ${inv.contact ? `<div class="detail-contact">${escapeHtml(inv.contact)}</div>` : ''}
+                        </div>
+                        ${fitBadgeHtml}
+                    </div>
+                    <div class="detail-tags">
+                        <span class="detail-tag" style="background: rgba(255,109,53,0.12); color: var(--primary);">${escapeHtml(inv.stage)}</span>
+                        <span class="detail-tag" style="background: ${pColor}22; color: ${pColor};">${inv.priority} Priority</span>
+                        <span class="detail-tag" style="background: ${fColor}22; color: ${fColor};">${inv.fit} Fit</span>
+                        <span class="detail-tag" style="background: rgba(255,255,255,0.08); color: var(--text-secondary);">Owner: ${inv.owner}</span>
+                    </div>
+                </div>
+            `;
+
+            // Overview section (enriched data)
+            const hasEnrichedData = inv.description || inv.investorType || inv.location || inv.aum || inv.investmentFocus || inv.fundStage || inv.checkSizeMin || inv.checkSizeMax;
+            if (hasEnrichedData) {
+                html += `<div class="detail-section"><div class="detail-section-title">Overview</div><div class="detail-grid">`;
+                if (inv.description) html += `<div class="detail-field full-width"><span class="detail-field-label">About</span><span class="detail-field-value">${escapeHtml(inv.description)}</span></div>`;
+                if (inv.investorType) html += `<div class="detail-field"><span class="detail-field-label">Investor Type</span><span class="detail-field-value">${escapeHtml(inv.investorType)}</span></div>`;
+                if (inv.location) html += `<div class="detail-field"><span class="detail-field-label">Location</span><span class="detail-field-value">${escapeHtml(inv.location)}</span></div>`;
+                if (inv.aum) html += `<div class="detail-field"><span class="detail-field-label">AUM</span><span class="detail-field-value">${escapeHtml(inv.aum)}</span></div>`;
+                if (inv.investmentFocus) html += `<div class="detail-field full-width"><span class="detail-field-label">Investment Focus</span><span class="detail-field-value">${escapeHtml(inv.investmentFocus)}</span></div>`;
+                if (inv.fundStage) html += `<div class="detail-field"><span class="detail-field-label">Target Stages</span><span class="detail-field-value">${escapeHtml(inv.fundStage)}</span></div>`;
+                if (inv.checkSizeMin || inv.checkSizeMax) {
+                    const min = inv.checkSizeMin ? `$${(inv.checkSizeMin / 1000000).toFixed(1)}M` : '?';
+                    const max = inv.checkSizeMax ? `$${(inv.checkSizeMax / 1000000).toFixed(1)}M` : '?';
+                    html += `<div class="detail-field"><span class="detail-field-label">Check Size</span><span class="detail-field-value">${min} – ${max}</span></div>`;
+                }
+                html += `</div></div>`;
+            }
+
+            // Links section
+            const hasLinks = inv.url || inv.linkedinUrl || inv.twitterUrl || inv.website;
+            if (hasLinks) {
+                html += `<div class="detail-section"><div class="detail-section-title">Links</div><div class="detail-grid">`;
+                if (inv.url) html += `<div class="detail-field"><span class="detail-field-label">URL</span><span class="detail-field-value"><a href="${escapeHtml(inv.url)}" target="_blank">${escapeHtml(inv.url)}</a></span></div>`;
+                if (inv.linkedinUrl) html += `<div class="detail-field"><span class="detail-field-label">LinkedIn</span><span class="detail-field-value"><a href="${escapeHtml(inv.linkedinUrl)}" target="_blank">${escapeHtml(inv.linkedinUrl)}</a></span></div>`;
+                if (inv.twitterUrl) html += `<div class="detail-field"><span class="detail-field-label">Twitter/X</span><span class="detail-field-value"><a href="${escapeHtml(inv.twitterUrl)}" target="_blank">${escapeHtml(inv.twitterUrl)}</a></span></div>`;
+                if (inv.website) html += `<div class="detail-field"><span class="detail-field-label">Website</span><span class="detail-field-value"><a href="${escapeHtml(inv.website)}" target="_blank">${escapeHtml(inv.website)}</a></span></div>`;
+                html += `</div></div>`;
+            }
+
+            // Portfolio section
+            if (inv.portfolioCompanies && inv.portfolioCompanies.length > 0) {
+                html += `<div class="detail-section"><div class="detail-section-title">Portfolio Companies</div><div class="detail-portfolio">`;
+                inv.portfolioCompanies.forEach(p => {
+                    const name = typeof p === 'string' ? p : p.name;
+                    html += `<span class="detail-portfolio-tag">${escapeHtml(name)}</span>`;
+                });
+                html += `</div></div>`;
+            }
+
+            // Fit Analysis section
+            if (inv.fitAssessment || (inv.fitSignals && inv.fitSignals.length > 0)) {
+                html += `<div class="detail-section"><div class="detail-section-title">Fit Analysis</div>`;
+                if (inv.fitAssessment) {
+                    html += `<div class="detail-assessment">${escapeHtml(inv.fitAssessment)}</div>`;
+                }
+                if (inv.fitSignals && inv.fitSignals.length > 0) {
+                    html += `<div class="detail-signals" style="margin-top: 12px;">`;
+                    inv.fitSignals.forEach(s => {
+                        const icon = s.sentiment === 'positive' ? '+' : s.sentiment === 'negative' ? '-' : '~';
+                        html += `
+                            <div class="detail-signal">
+                                <span class="detail-signal-icon ${s.sentiment || 'neutral'}">${icon}</span>
+                                <span><strong>${escapeHtml(s.signal)}:</strong> ${escapeHtml(s.detail)}</span>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            // Pipeline & Follow-up section
+            html += `
+                <div class="detail-section">
+                    <div class="detail-section-title">Pipeline Status</div>
+                    <div class="detail-grid">
+                        <div class="detail-field"><span class="detail-field-label">Stage</span><span class="detail-field-value">${escapeHtml(inv.stage)}</span></div>
+                        <div class="detail-field"><span class="detail-field-label">Follow-up</span><span class="detail-field-value">${followUpHtml}</span></div>
+                    </div>
+                </div>
+            `;
+
+            // Notes section
+            if (inv.notes) {
+                html += `
+                    <div class="detail-section">
+                        <div class="detail-section-title">Notes</div>
+                        <div class="detail-notes">${escapeHtml(inv.notes)}</div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('detailModalBody').innerHTML = html;
+
+            // Meta footer
+            const meta = [];
+            if (inv.enrichedAt) meta.push(`Enriched ${new Date(inv.enrichedAt).toLocaleDateString()}`);
+            if (inv.createdAt) meta.push(`Added ${new Date(inv.createdAt).toLocaleDateString()}`);
+            document.getElementById('detailModalMeta').textContent = meta.join(' · ');
+
+            // Wire up edit button
+            document.getElementById('detailEditBtn').onclick = () => {
+                closeDetailModal();
+                editInvestor(id);
+            };
+
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        // Close detail modal on overlay click
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeDetailModal();
+        });
+
+        // Close detail modal on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('detailModal').classList.contains('active')) {
+                closeDetailModal();
+            }
+        });
+
         async function reviewEnrichment(id) {
             currentEnrichInvestorId = id;
             const inv = investors.find(i => i.id === id);
@@ -3773,6 +4413,40 @@ Brief summary: what was found, sources, what couldn't be enriched. Include the f
 - Only include verified URLs from search results.
 - Be token-efficient. No narration.`;
 
+        const DISCOVERY_SYSTEM_PROMPT = `You are an investor discovery specialist. Your job is to find ~20 investor candidates that are a strong fit for a startup's current fundraise, using web research.
+
+## Execution Protocol
+
+### Step 1 - Understand the Company
+Analyze the full company profile: stage, raise amount, valuation, industry, sector, target investor types, thesis, moat, competitive advantages, team, traction metrics, and geography.
+
+### Step 2 - Research Investors
+Run 8-12 focused web searches to find investors matching the profile:
+1. "<industry>" "<stage>" investors 2025 2026
+2. "<sector>" seed investors fund
+3. "AI" "enterprise" investor portfolio
+4. angel investor "<industry>" active 2025 2026
+5. "<location>" venture capital seed
+6. "<competitor name>" investors backers
+7. site:crunchbase.com "<industry>" investor
+8. "<target investor type>" "<stage>" fund
+
+Prioritize: actively deploying capital (2024-2026), thesis alignment, stage match, check size fit, geographic relevance.
+
+### Step 3 - Compile Candidates
+For each candidate: firm_name, contact_name, investor_type, rationale (2-3 sentences), thesis_alignment, location, check_size_min/max (USD integers), website, source_url, source_name.
+
+### Step 4 - Submit
+Call submit_discovery EXACTLY ONCE with all candidates.
+
+## Rules
+- Target ~20 candidates, quality over quantity (15-25 acceptable)
+- Never fabricate investors - every candidate from search results
+- Diversify: mix lead investors, co-investors, angels, strategic
+- Prefer investors with recent activity (2024-2026)
+- Check sizes as integers in USD. Use 0 if unknown.
+- Only include verified URLs from search results.`;
+
         let agentRuns = [];
 
         async function loadAgentRuns() {
@@ -3873,6 +4547,169 @@ Brief summary: what was found, sources, what couldn't be enriched. Include the f
             }
             el.classList.toggle('visible');
         }
+
+        function toggleDiscoveryPrompt() {
+            const el = document.getElementById('discoveryPromptContent');
+            if (!el.textContent) {
+                el.textContent = DISCOVERY_SYSTEM_PROMPT;
+            }
+            el.classList.toggle('visible');
+        }
+
+        // ============ DISCOVERY AGENT ============
+        let discoveryCandidates = [];
+        let discoveryPollingInterval = null;
+
+        async function runDiscovery() {
+            const btn = document.getElementById('discoverBtn');
+            const status = document.getElementById('discoveryStatus');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="enrich-spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:6px;"></span> Running...';
+            status.textContent = 'Starting discovery agent...';
+
+            try {
+                const result = await api('/api/discovery/run', { method: 'POST' });
+
+                // Fire-and-forget worker call
+                api(`/api/discovery/worker`, {
+                    method: 'POST',
+                    body: JSON.stringify({ requestId: result.requestId })
+                }).catch(() => {});
+
+                status.textContent = 'Agent is researching investors... This may take 2-4 minutes.';
+
+                // Poll for completion
+                discoveryPollingInterval = setInterval(async () => {
+                    try {
+                        const run = await api('/api/discovery/run');
+                        if (run && run.status === 'completed') {
+                            clearInterval(discoveryPollingInterval);
+                            discoveryPollingInterval = null;
+                            status.textContent = `Found ${run.candidate_count} candidates.`;
+                            btn.disabled = false;
+                            btn.innerHTML = '<span>&#x1F50D;</span> Discover Investors';
+                            await loadDiscoveryCandidates();
+                        } else if (run && run.status === 'failed') {
+                            clearInterval(discoveryPollingInterval);
+                            discoveryPollingInterval = null;
+                            status.textContent = `Discovery failed: ${run.error || 'Unknown error'}`;
+                            btn.disabled = false;
+                            btn.innerHTML = '<span>&#x1F50D;</span> Discover Investors';
+                        }
+                    } catch (e) {
+                        // keep polling
+                    }
+                }, 3000);
+
+            } catch (e) {
+                status.textContent = `Error: ${e.message}`;
+                btn.disabled = false;
+                btn.innerHTML = '<span>&#x1F50D;</span> Discover Investors';
+            }
+        }
+
+        async function loadDiscoveryCandidates() {
+            try {
+                discoveryCandidates = await api('/api/discovery/candidates');
+                renderDiscoveryCandidates();
+            } catch (e) {
+                discoveryCandidates = [];
+            }
+        }
+
+        function renderDiscoveryCandidates() {
+            const container = document.getElementById('discoveryResults');
+            const approveAllBtn = document.getElementById('approveAllBtn');
+            const pendingCount = discoveryCandidates.filter(c => c.status === 'pending').length;
+
+            approveAllBtn.style.display = pendingCount > 0 ? 'inline-block' : 'none';
+
+            if (discoveryCandidates.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = `<div class="discovery-candidates">${discoveryCandidates.map(c => {
+                const checkMin = c.check_size_min ? `$${(c.check_size_min / 1000000).toFixed(1)}M` : '';
+                const checkMax = c.check_size_max ? `$${(c.check_size_max / 1000000).toFixed(1)}M` : '';
+                const checkStr = checkMin && checkMax ? `${checkMin} - ${checkMax}` : checkMin || checkMax || '';
+
+                let actionsHtml = '';
+                if (c.status === 'pending') {
+                    actionsHtml = `
+                        <div class="candidate-actions">
+                            <button class="btn-approve" onclick="approveCandidate(${c.id})">&#x2713; Approve</button>
+                            <button class="btn-reject" onclick="rejectCandidate(${c.id})">&#x2717; Reject</button>
+                        </div>
+                    `;
+                } else {
+                    actionsHtml = `<div class="candidate-status-badge ${c.status}">${c.status === 'approved' ? '&#x2713; Added to Pipeline' : '&#x2717; Rejected'}</div>`;
+                }
+
+                return `
+                    <div class="candidate-card ${c.status}">
+                        <div class="candidate-header">
+                            <span class="candidate-firm">${escapeHtml(c.firm_name)}</span>
+                            ${c.investor_type ? `<span class="candidate-type">${escapeHtml(c.investor_type)}</span>` : ''}
+                        </div>
+                        ${c.rationale ? `<div class="candidate-rationale">${escapeHtml(c.rationale)}</div>` : ''}
+                        ${c.thesis_alignment ? `<div class="candidate-thesis">${escapeHtml(c.thesis_alignment)}</div>` : ''}
+                        <div class="candidate-meta">
+                            ${c.location ? `<span>&#x1F4CD; ${escapeHtml(c.location)}</span>` : ''}
+                            ${checkStr ? `<span>&#x1F4B0; ${checkStr}</span>` : ''}
+                            ${c.source_url ? `<span><a href="${escapeHtml(c.source_url)}" target="_blank" style="color: var(--primary); text-decoration: none;">${escapeHtml(c.source_name || 'Source')}</a></span>` : ''}
+                        </div>
+                        ${actionsHtml}
+                    </div>
+                `;
+            }).join('')}</div>`;
+        }
+
+        async function approveCandidate(id) {
+            try {
+                await api(`/api/discovery/candidates/${id}`, { method: 'POST' });
+                const c = discoveryCandidates.find(x => x.id === id);
+                if (c) c.status = 'approved';
+                renderDiscoveryCandidates();
+                // Refresh pipeline data
+                investors = await api('/api/investors');
+                renderAll();
+            } catch (e) {
+                alert('Failed to approve: ' + e.message);
+            }
+        }
+
+        async function rejectCandidate(id) {
+            try {
+                await api(`/api/discovery/candidates/${id}`, { method: 'DELETE' });
+                const c = discoveryCandidates.find(x => x.id === id);
+                if (c) c.status = 'rejected';
+                renderDiscoveryCandidates();
+            } catch (e) {
+                alert('Failed to reject: ' + e.message);
+            }
+        }
+
+        async function approveAllCandidates() {
+            const pending = discoveryCandidates.filter(c => c.status === 'pending');
+            for (const c of pending) {
+                try {
+                    await api(`/api/discovery/candidates/${c.id}`, { method: 'POST' });
+                    c.status = 'approved';
+                } catch (e) {
+                    // continue with remaining
+                }
+            }
+            renderDiscoveryCandidates();
+            investors = await api('/api/investors');
+            renderAll();
+        }
+
+        // Load discovery candidates on Agents tab
+        document.querySelector('[data-tab="agents"]')?.addEventListener('click', () => {
+            loadDiscoveryCandidates();
+        });
     </script>
 </body>
 </html>
